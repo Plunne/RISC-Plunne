@@ -26,4 +26,5 @@ Ici nous allons realiser l'architecture la plus simple, celle avec le minimum d'
 
 Je vais parler brievement de 2 grosses parties importantes dans le monde des architectures de CPU, nous iront plus en detail dans une prochaine partie, en attendant j'espere que cela vous plait. 😊
 
-[`Revenir au blog`](README.md)
+-----
+[`RISC-Plunne`](https://github.com/Plunne/RISC-Plunne) [`Revenir au blog`](README.md) `Suivant >>`
