@@ -35,7 +35,17 @@ library work;
 use work.riscp_common.all;
 
 entity RISC_Plunne is
---  Port ( );
+
+    Port (
+        -- Clock
+        i_CLK : in std_logic;
+
+        -- Memory Ports
+        i_InstructionMemory : std_logic_vector (XLENM1 downto 0);
+        o_DataMemory        : std_logic_vector (XLENM1 downto 0)
+        --io_XregsMemory
+    );
+
 end RISC_Plunne;
 
 architecture arch_RISC_Plunne of RISC_Plunne is

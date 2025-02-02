@@ -37,10 +37,10 @@ use work.riscp_common.all;
 entity IMem is
     Port (
         -- Instruction Address
-        i_IMem_InstAddr : in std_logic_vector (XLENM1 downto 0);
+        i_InstAddr : in std_logic_vector (XLENM1 downto 0);
         -- Instruction Ports
-        i_IMem_Instruction : in std_logic_vector (XLENM1 downto 0);
-        o_IDcd_Instruction : out std_logic_vector (XLENM1 downto 0);
+        i_Instruction : in std_logic_vector (XLENM1 downto 0);
+        o_Instruction : out std_logic_vector (XLENM1 downto 0);
         -- Program Counter
         i_PC : std_logic_vector (XLENM1 to 0);
         -- Clock
@@ -50,8 +50,19 @@ entity IMem is
 end IMem;
 
 architecture arch_InstructionMemory of IMem is
+    
+    type t_IMemStack is array (0 to XLENM1) of std_logic_vector(XLENM1 downto 0);
+    signal r_Buffer : t_IMemStack;
 
 begin
 
+    p_IMem: process(i_CLK)
+    begin
+
+        if rising_edge(i_CLK) then
+            -- r_Buffer()
+        end if;
+
+    end process p_IMem;
 
 end arch_InstructionMemory;

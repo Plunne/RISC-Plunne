@@ -37,12 +37,12 @@ use work.riscp_common.all;
 entity DMem is
     Port (
         -- Data Address
-        o_DMem_DataAddr : in std_logic_vector (XLENM1 downto 0);
+        o_DataAddr : in std_logic_vector (XLENM1 downto 0);
         -- Data Ports
-        i_ALU_Data  : in std_logic_vector (XLENM1 downto 0);
-        o_DMem_Data : out std_logic_vector (XLENM1 downto 0);
+        i_Data  : in std_logic_vector (XLENM1 downto 0);
+        o_Data : out std_logic_vector (XLENM1 downto 0);
         -- Rd (Destination Register Address)
-        i_Dcd_rd : out integer;
+        i_rd : out integer;
         -- Write-Back
         o_WriteBack : std_logic_vector (XLENM1 to 0);
         -- Clock

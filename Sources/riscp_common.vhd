@@ -36,8 +36,8 @@ package riscp_common is
 constant XLEN   : integer := 32;
 constant XLENM1 : integer := XLEN -1;
 
-end riscp_common;
+end package riscp_common;
 
 package body riscp_common is
 
-end riscp_common;
+end package body riscp_common;

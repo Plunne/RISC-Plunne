@@ -51,7 +51,8 @@ end RegF;
 
 architecture arch_RegisterFile of RegF is
 
-    signal r_Xregs : array (0 to XLENM1) of std_logic_vector(XLENM1 downto 0);
+    type t_RegFile is array (0 to XLENM1) of std_logic_vector(XLENM1 downto 0);
+    signal r_Xreg : t_RegFile;
 
 begin
 

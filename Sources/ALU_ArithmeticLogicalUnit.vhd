@@ -45,7 +45,7 @@ entity ALU is
         o_Result : out std_logic_vector (XLENM1 downto 0);
         -- Flags
         i_Flags : out std_logic_vector (2 downto 0); -- input status (ex. carry)
-        o_Flags : out std_logic_vector (2 downto 0)  -- output status (ex. carry)
+        o_Flags : out std_logic_vector (2 downto 0); -- output status (ex. carry)
         -- Clock
         i_CLK : std_logic
     );

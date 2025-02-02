@@ -40,7 +40,7 @@ entity IDcd is
         -- Unified Instruction from IMem --
         -----------------------------------
         -- Instruction from IMem
-        i_IDcd_Instruction : in std_logic_vector (XLENM1 to 0);
+        i_Instruction : in std_logic_vector (XLENM1 to 0);
 
         ------------------------------------
         -- Decoded Instruction to Outputs --
@@ -55,8 +55,8 @@ entity IDcd is
         o_funct3 : out integer;
         o_funct7 : out integer;
         -- ImmU related
-        o_imm : out integer
-        
+        o_imm : out integer;
+
         -- Clock
         i_CLK : std_logic
 
