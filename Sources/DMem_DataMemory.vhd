@@ -32,10 +32,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 library work;
-use work.riscp_common.all;
+use work.libriscp_common.all;
 
 entity DMem is
     Port (
+        -- Clock
+        i_CLK : std_logic;
+        
         -- Data Address
         o_DataAddr : in std_logic_vector (XLENM1 downto 0);
         -- Data Ports
@@ -44,9 +47,7 @@ entity DMem is
         -- Rd (Destination Register Address)
         i_rd : out integer;
         -- Write-Back
-        o_WriteBack : std_logic_vector (XLENM1 to 0);
-        -- Clock
-        i_CLK : std_logic
+        o_WriteBack : std_logic_vector (XLENM1 to 0)
     );
 end DMem;
 

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/22/2025 10:02:34 PM
+-- Create Date: 02/04/2025 09:23:47 PM
 -- Design Name: 
--- Module Name: riscp_common - arch_riscp_common
+-- Module Name: libriscp_common - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,13 +31,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package riscp_common is
+package libriscp_common is
 
 constant XLEN   : integer := 32;
 constant XLENM1 : integer := XLEN -1;
 
-end package riscp_common;
+end package libriscp_common;
 
-package body riscp_common is
+package body libriscp_common is
 
-end package body riscp_common;
+end package body libriscp_common;

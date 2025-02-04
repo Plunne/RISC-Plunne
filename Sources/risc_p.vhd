@@ -32,17 +32,23 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 library work;
-use work.riscp_common.all;
+use work.libriscp_common.all;
 
 entity RISC_Plunne is
 
     Port (
         -- Clock
         i_CLK : in std_logic;
-
-        -- Memory Ports
-        i_InstructionMemory : std_logic_vector (XLENM1 downto 0);
-        o_DataMemory        : std_logic_vector (XLENM1 downto 0)
+        
+        ------------------
+        -- Memory Ports --
+        ------------------
+        -- Instruction Memory
+        i_IMem_port : std_logic_vector (XLENM1 downto 0);
+        o_IMem_addr : std_logic_vector (XLENM1 downto 0);
+        -- Data Memory
+        o_DMem_port : std_logic_vector (XLENM1 downto 0);
+        o_DMem_addr : std_logic_vector (XLENM1 downto 0)
         --io_XregsMemory
     );
 

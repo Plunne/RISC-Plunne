@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 library work;
-use work.riscp_common.all;
+use work.libriscp_common.all;
 
 entity IDcd is
     Port (
