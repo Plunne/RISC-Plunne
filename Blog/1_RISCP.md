@@ -10,7 +10,7 @@ En premier lieu avant de se lancer dans un tel projet il est important de compre
 
 RISC-V est une architecture de micro-processeurs cree en 2013 par l'Universite de Berkeley. Son role est de definir les differentes unites a l'interieur de ces derniers et leurs interactions. On reviendra plus en detail la dessus une prochaine fois.
 
-Comme l'objectif est de faire tourner des programme sur un micro-processeur il faut definir un langage qu'il puisse interpreter.
+Comme l'objectif est de faire tourner des programmes sur un micro-processeur il faut definir un langage qu'il puisse interpreter.
 
 ## 1.2 - Le jeu d'instructions
 
@@ -27,4 +27,4 @@ Ici nous allons realiser l'architecture la plus simple, celle avec le minimum d'
 Je vais parler brievement de 2 grosses parties importantes dans le monde des architectures de CPU, nous iront plus en detail dans une prochaine partie, en attendant j'espere que cela vous plait. 😊
 
 -----
-[`RISC-Plunne`](https://github.com/Plunne/RISC-Plunne) [`Revenir au blog`](README.md) `Suivant >>`
+[`RISC-Plunne`](https://github.com/Plunne/RISC-Plunne) [`Revenir au blog`](README.md) [`Suivant >>`](2_RISCP.md)
