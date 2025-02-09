@@ -33,19 +33,24 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 library work;
 use work.libriscp_common.all;
+use work.libriscp_inst_types.all;
 
 entity RegF is
     Port (
-        -- Registers Storage for IDcd
-        i_rs1 : in integer;
-        i_rs2 : in integer;
-
-        -- Operands to ALU
-        o_OpA : in integer;
-        o_OpB : in integer;
-
         -- Clock
-        i_CLK : std_logic
+        i_CLK : std_logic;
+    
+        -- Registers Storage
+        i_rd    : in t_Rd;
+        i_rs1   : in t_Rs1;
+        i_rs2   : in t_Rs2;
+        
+        -- Write-Back
+        i_WriteBack : in std_logic_vector(XLENM1 downto 0);
+        
+        -- Operands to ALU (Content of Rs1 and Rs2)
+        o_OpA : in std_logic_vector(XLENM1 downto 0);
+        o_OpB : in std_logic_vector(XLENM1 downto 0)
     );
 end RegF;
 

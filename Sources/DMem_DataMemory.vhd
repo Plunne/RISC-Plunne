@@ -33,21 +33,30 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 library work;
 use work.libriscp_common.all;
+use work.libriscp_inst_types.all;
 
 entity DMem is
     Port (
         -- Clock
         i_CLK : std_logic;
         
-        -- Data Address
-        o_DataAddr : in std_logic_vector (XLENM1 downto 0);
-        -- Data Ports
-        i_Data  : in std_logic_vector (XLENM1 downto 0);
-        o_Data : out std_logic_vector (XLENM1 downto 0);
         -- Rd (Destination Register Address)
-        i_rd : out integer;
+        i_rd : out t_Rd;
+        
         -- Write-Back
-        o_WriteBack : std_logic_vector (XLENM1 to 0)
+        o_WriteBack : std_logic_vector (XLENM1 to 0);
+        
+        -----------------
+        -- DATA MEMORY --
+        -----------------
+        
+        -- Data Address
+        o_DataAddr  : in std_logic_vector (XLENM1 downto 0);
+        -- Data Ports
+        i_RData      : in std_logic_vector (XLENM1 downto 0);
+        o_WData      : out std_logic_vector (XLENM1 downto 0);
+        -- Data Write Enable
+        o_DataWr    : out std_logic
     );
 end DMem;
 

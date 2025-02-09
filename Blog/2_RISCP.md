@@ -65,4 +65,4 @@ Mais dans d'autres cas, nous souhaitons inserer directement une valeur ne proven
 Cet article a ete assez difficile a rediger, arriver a synthetiser, creer une trame narrative sans parler de tout en meme temps, trouver un moyen d'enchainer les divers aspects pour faire decouvrir le sujet progressivement n'etait pas une simple affaire, en tout cas j'espere que cela vous a plus, on commence a rentrer un peu plus dans les details, de plus en plus de termes viennent s'ajouter et ce n'est pas fini, le plus gros reste a venir, nous allons aller d'avantage dans les details mais il reste d'autres sujet a evoquer, prochainement je vais aborder le jeu d'instruction RV32I et le fonctionnement vulgarise d'un CPU car jusqu'a present je suis restee assez flou concernant l'interpretation des instructions par le processeur. A bientot! 😊
 
 -----
-[`RISC-Plunne`](https://github.com/Plunne/RISC-Plunne) [`<< Precedent`](1_RISCP.md) [`Revenir au blog`](README.md)
+[`RISC-Plunne`](https://github.com/Plunne/RISC-Plunne) [`<< Precedent`](1_RISCP.md) [`Revenir au blog`](README.md) [`Suivant >>`](3_RISCP.md)

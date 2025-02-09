@@ -36,16 +36,15 @@ use work.libriscp_common.all;
 
 entity IMem is
     Port (
+        -- Clock
+        i_CLK : std_logic;
+        -- Program Counter
+        i_PC : std_logic_vector (XLENM1 to 0);
         -- Instruction Address
         i_InstAddr : in std_logic_vector (XLENM1 downto 0);
         -- Instruction Ports
         i_Instruction : in std_logic_vector (XLENM1 downto 0);
-        o_Instruction : out std_logic_vector (XLENM1 downto 0);
-        -- Program Counter
-        i_PC : std_logic_vector (XLENM1 to 0);
-        -- Clock
-        i_CLK : std_logic
-
+        o_Instruction : out std_logic_vector (XLENM1 downto 0)
     );
 end IMem;
 

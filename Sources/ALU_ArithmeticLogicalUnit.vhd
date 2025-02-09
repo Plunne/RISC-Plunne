@@ -33,21 +33,27 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 library work;
 use work.libriscp_common.all;
+use work.libriscp_inst_types.all;
 
 entity ALU is
     Port (
-        -- Operands
-        i_OpA : in integer; -- rs1
-        i_OpB : in integer; -- rs2
-        -- OpCode
-        i_OpCode : in std_logic_vector (2 downto 0);
-        -- Output Data
-        o_Result : out std_logic_vector (XLENM1 downto 0);
+        -- Clock
+        i_CLK : std_logic;
+        
+        -- Operands (Content of Rs1 and Rs2)
+        i_OpA : in std_logic_vector(XLENM1 downto 0); -- rs1
+        i_OpB : in std_logic_vector(XLENM1 downto 0); -- rs2
+        
+        -- Function
+        i_Funct3 : in t_Funct3;
+        i_Funct7 : in t_Funct7;
+        
         -- Flags
         i_Flags : out std_logic_vector (2 downto 0); -- input status (ex. carry)
         o_Flags : out std_logic_vector (2 downto 0); -- output status (ex. carry)
-        -- Clock
-        i_CLK : std_logic
+        
+        -- Output Data
+        o_Result : out std_logic_vector (XLENM1 downto 0)
     );
 end ALU;
 
@@ -55,5 +61,13 @@ architecture arch_ArithmeticLogicalUnit of ALU is
 
 begin
 
+    p_ALU: process(i_CLK)
+    begin
+    
+        if rising_edge(i_CLK) then
+            -- ALU
+        end if;
+        
+    end process p_ALU;
 
 end arch_ArithmeticLogicalUnit;
