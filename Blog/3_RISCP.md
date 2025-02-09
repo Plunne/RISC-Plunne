@@ -11,7 +11,7 @@ Si nous parlons de sciences de l'informatique, ce n'est pas sans raison, l'infor
 
 Le micro-processeur c'est le coeur de notre systeme, c'est lui qui traitre les informations, les calculs et gere l'interaction entre les composants d'un systeme.
 
-Ces informations, dans un corps humain s'apperenterait a notre memoire, et ca tombe bien vu que c'est aussi le terme employe dans l'informatique.
+Ces informations, dans un corps humain s'apparenteraient a notre memoire, et ca tombe bien vu que c'est aussi le terme employe dans l'informatique.
 
 L'interaction entre les composants c'est le circuit electronique qui le permet, dans un corps humain cela s'apparente aux muscles qui derriere font bouger les membres qui dans notre cas sont appelles peripheriques (d'entrees/sorties).
 
@@ -63,7 +63,7 @@ Il dispose d'un systeme d'incrementation qui met a jour l'adresse ainsi qu'un sy
 
 ### 3.3.3 - Instruction Decoder
 
-L'Instruction Decoder recupere l'instruction indiquee par le PC et separe son contenu et le repartit au differentes parties correspondants pour les distribuer aux differentes unites du CPU qui en ont besoin. *(Phase : Instruction Decode)*
+L'Instruction Decoder recupere l'instruction indiquee par le PC et separe son contenu et le repartit aux differentes parties correspondantes pour les distribuer aux unites du CPU qui en ont besoin. *(Phase : Instruction Decode)*
 
 ### 3.3.4 - Register File
 
@@ -79,7 +79,7 @@ Ces registres ont chacun un usage approprie definit par l'architecture.
 
 ### 3.3.5 - Arithmetic Logical Unit
 
-L'Arithmetic Logical Unit (ALU), souvent abregee ALU, est l'unite qui effectue les operations. C'est a l'interieur de celle-ci que resident les fonctions de calcul du micro-processeur.
+L'Arithmetic Logical Unit (ALU), est l'unite qui effectue les operations. C'est a l'interieur de celle-ci que resident les fonctions de calcul du micro-processeur.
 
 Elle prend en entree 2 valeurs (donnees) accompagnees de quoi selectionner l'operation a effectuer et ressort le resultat en sortie. *(Phase : Execute)*
 

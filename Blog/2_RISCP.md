@@ -42,7 +42,7 @@ Une instruction est une operation ordonnee au CPU pour lui indiquer quelle actio
 
 Elle se compose d'un **OpCode**, il definit le type d'operation a effectuer et le format dont le processeur doit la decomposer.
 
-L'objectif est de mettre a jour un emplacement memoire situe dans la CPU. Nous reviendrons plus tard sur les registres dits generaux. La partie **rd** pour registre de destination definit donc lequel de ces registre nous souhaitons mettre a jour.
+L'objectif est de mettre a jour un emplacement memoire situe dans le CPU. Nous reviendrons plus tard sur les registres dits generaux. La partie **rd** pour registre de destination definit donc lequel de ces registre nous souhaitons mettre a jour.
 
 Generalement, pour la majorite des instructions, nous retrouvons des precisions sur la fonction a appeller. La ou l'OpCode definit le type d'instruction, les parties **funct3** et/ou **funct7** designent laquelle des operations de ce type d'instruction le CPU doit effectuer.
 
