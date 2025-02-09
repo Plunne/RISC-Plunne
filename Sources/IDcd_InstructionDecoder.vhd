@@ -87,20 +87,13 @@ begin
                     o_funct7    <= i_Instruction(FUNCT7_MAX downto FUNCT7_MIN);
                     
                 -- I-Type
-                when OPCODE_I_TYPE =>
+                when OPCODE_I_TYPE | OPCODE_I_LOAD | OPCODE_I_JALR | OPCODE_I_ENV =>
                     o_rd        <= i_Instruction(RD_MAX downto RD_MIN);
                     o_funct3    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
                     o_rs1       <= i_Instruction(RS1_MAX downto RS1_MIN);
                     o_imm       <= i_Instruction(IMM_I_MAX downto IMM_I_MIN);
                     
-                -- LOAD
-                when OPCODE_I_LOAD =>
-                    o_rd        <= i_Instruction(RD_MAX downto RD_MIN);
-                    o_funct3    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
-                    o_rs1       <= i_Instruction(RS1_MAX downto RS1_MIN);
-                    o_imm       <= i_Instruction(IMM_I_MAX downto IMM_I_MIN);
-                    
-                -- STORE
+                -- S-Type
                 when OPCODE_S_TYPE =>
                     o_imm(IMM_S_4_0_MAX downto IMM_S_4_0_MIN)   <= i_Instruction(IMM_S_4_0_MAX downto IMM_S_4_0_MIN);
                     o_funct3                                    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
@@ -117,8 +110,8 @@ begin
                     o_rs2                                       <= i_Instruction(RS2_MAX downto RS2_MIN);
                     o_imm(IMM_B_10_5_MAX downto IMM_B_10_5_MIN) <= i_Instruction(IMM_B_10_5_MAX downto IMM_B_10_5_MIN);
                     o_imm(IMM_B_12_BIT)                         <= i_Instruction(IMM_B_12_BIT);
-                    
-                -- JAL
+                
+                -- J-Type
                 when OPCODE_J_JAL =>
                     o_rd                                            <= i_Instruction(RD_MAX downto RD_MIN);
                     o_imm(IMM_J_19_12_MAX downto IMM_J_19_12_MIN)   <= i_Instruction(IMM_J_19_12_MAX downto IMM_J_19_12_MIN);
@@ -126,24 +119,10 @@ begin
                     o_imm(IMM_J_10_1_MAX downto IMM_J_10_1_MIN)     <= i_Instruction(IMM_J_10_1_MAX downto IMM_J_10_1_MIN);
                     o_imm(IMM_J_20_BIT)                             <= i_Instruction(IMM_J_20_BIT);
                 
-                -- JALR
-                when OPCODE_I_JALR =>
-                    o_rd        <= i_Instruction(RD_MAX downto RD_MIN);
-                    o_funct3    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
-                    o_rs1       <= i_Instruction(RS1_MAX downto RS1_MIN);
-                    o_imm       <= i_Instruction(IMM_I_MAX downto IMM_I_MIN);
-                    
                 -- U-Type
                 when OPCODE_U_LUI | OPCODE_U_AUIPC =>
                     o_rd                                <= i_Instruction(RD_MAX downto RD_MIN);
                     o_imm(IMM_U_MAX downto IMM_U_MIN)   <= i_Instruction(IMM_U_MAX downto IMM_U_MIN);
-                
-                -- ENVIRONMENT
-                when OPCODE_I_ENV =>
-                    o_rd        <= i_Instruction(RD_MAX downto RD_MIN);
-                    o_funct3    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
-                    o_rs1       <= i_Instruction(RS1_MAX downto RS1_MIN);
-                    o_imm       <= i_Instruction(IMM_I_MAX downto IMM_I_MIN);
             
             end case;
         
