@@ -31,10 +31,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.libriscp_common.all;
-use work.libriscp_inst_types.all;
-use work.libriscp_inst_defs.all;
+library libriscp;
+use libriscp.common.all;
+use libriscp.inst_types.all;
+use libriscp.inst_defs.all;
 
 entity IDcd is
     Port (
@@ -76,10 +76,20 @@ begin
     
         if rising_edge(i_CLK) then
         
+            -------------------
+            -- OpCode Decode --
+            -------------------
+            
+            o_OpCode <= i_Instruction(OPCODE_MAX downto OPCODE_MIN);
+            
+            ------------------------
+            -- Instruction Decode --
+            ------------------------
+        
             case i_Instruction(OPCODE_MAX downto OPCODE_MIN) is
                 
                 -- R-Type
-                when OPCODE_R_TYPE =>
+                when OPCODE_R_OPE =>
                     o_rd        <= i_Instruction(RD_MAX downto RD_MIN);
                     o_funct3    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
                     o_rs1       <= i_Instruction(RS1_MAX downto RS1_MIN);
@@ -87,14 +97,14 @@ begin
                     o_funct7    <= i_Instruction(FUNCT7_MAX downto FUNCT7_MIN);
                     
                 -- I-Type
-                when OPCODE_I_TYPE | OPCODE_I_LOAD | OPCODE_I_JALR | OPCODE_I_ENV =>
+                when OPCODE_I_OPE | OPCODE_I_LOAD | OPCODE_I_JALR | OPCODE_I_ENV =>
                     o_rd        <= i_Instruction(RD_MAX downto RD_MIN);
                     o_funct3    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
                     o_rs1       <= i_Instruction(RS1_MAX downto RS1_MIN);
                     o_imm       <= i_Instruction(IMM_I_MAX downto IMM_I_MIN);
                     
                 -- S-Type
-                when OPCODE_S_TYPE =>
+                when OPCODE_S_STORE =>
                     o_imm(IMM_S_4_0_MAX downto IMM_S_4_0_MIN)   <= i_Instruction(IMM_S_4_0_MAX downto IMM_S_4_0_MIN);
                     o_funct3                                    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);
                     o_rs1                                       <= i_Instruction(RS1_MAX downto RS1_MIN);
@@ -102,7 +112,7 @@ begin
                     o_imm(IMM_S_11_5_MAX downto IMM_S_11_5_MIN) <= i_Instruction(IMM_S_11_5_MAX downto IMM_S_11_5_MIN);
                 
                 -- B-Type
-                when OPCODE_B_TYPE =>
+                when OPCODE_B_BRANCH =>
                     o_imm(IMM_B_11_BIT)                         <= i_Instruction(IMM_B_11_BIT);
                     o_imm(IMM_B_4_1_MAX downto IMM_B_4_1_MIN)   <= i_Instruction(IMM_B_4_1_MAX downto IMM_B_4_1_MIN);
                     o_funct3                                    <= i_Instruction(FUNCT3_MAX downto FUNCT3_MIN);

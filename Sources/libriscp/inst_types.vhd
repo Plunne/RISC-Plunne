@@ -4,7 +4,7 @@
 -- 
 -- Create Date: 02/04/2025 05:27:10 PM
 -- Design Name: 
--- Module Name: libriscp_inst_types - Behavioral
+-- Module Name: inst_types
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package libriscp_inst_types is
+package inst_types is
 
 -------------
 -- OPCODES --
@@ -49,23 +49,23 @@ constant OPCODE_SIZEM1  : integer := OPCODE_SIZE -1;
 subtype t_OpCode is std_logic_vector(OPCODE_SIZEM1 downto 0);
 
 -- Register
-constant OPCODE_R_TYPE  : t_OpCode  := "0110011";
+constant OPCODE_R_OPE       : t_OpCode  := "0110011";
 -- Immediate
-constant OPCODE_I_TYPE  : t_OpCode  := "0010011";
+constant OPCODE_I_OPE       : t_OpCode  := "0010011";
 -- Load
-constant OPCODE_I_LOAD  : t_OpCode  := "0000011";
+constant OPCODE_I_LOAD      : t_OpCode  := "0000011";
 -- Store
-constant OPCODE_S_TYPE  : t_OpCode  := "0100011";
+constant OPCODE_S_STORE     : t_OpCode  := "0100011";
 -- Branch
-constant OPCODE_B_TYPE  : t_OpCode  := "1100011";
+constant OPCODE_B_BRANCH    : t_OpCode  := "1100011";
 -- Jump
-constant OPCODE_J_JAL   : t_OpCode  := "1101111";
-constant OPCODE_I_JALR  : t_OpCode  := "1100111";
+constant OPCODE_J_JAL       : t_OpCode  := "1101111";
+constant OPCODE_I_JALR      : t_OpCode  := "1100111";
 -- Upper
-constant OPCODE_U_LUI   : t_OpCode  := "0110111";
-constant OPCODE_U_AUIPC : t_OpCode  := "0010111";
+constant OPCODE_U_LUI       : t_OpCode  := "0110111";
+constant OPCODE_U_AUIPC     : t_OpCode  := "0010111";
 -- Environment
-constant OPCODE_I_ENV   : t_OpCode  := "1110011";
+constant OPCODE_I_ENV       : t_OpCode  := "1110011";
 
 --------
 -- RD --
@@ -328,7 +328,7 @@ type t_J_Inst is record
     immJ_20     : t_Imm_J_20;
 end record t_J_Inst;
 
-end package libriscp_inst_types;
+end package inst_types;
 
-package body libriscp_inst_types is
-end package body libriscp_inst_types;
+package body inst_types is
+end package body inst_types;

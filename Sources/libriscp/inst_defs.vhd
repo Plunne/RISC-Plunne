@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02/04/2025 05:27:10 PM
+-- Create Date: 02/15/2025 10:16:59 PM
 -- Design Name: 
--- Module Name: libriscp_inst_defs - Behavioral
+-- Module Name: inst_defs
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,10 +31,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.libriscp_inst_types.all;
+library libriscp;
+use libriscp.inst_types.all;
 
-package libriscp_inst_defs is
+package inst_defs is
 
 ---------------------------
 -- REGISTER INSTRUCTIONS --
@@ -194,7 +194,7 @@ constant EBREAK_FUNCT3      : t_Funct3      := FUNCT3_X0;
 constant EBREAK_FUNCT7      : t_Funct7      := FUNCT7_X01;
 constant EBREAK_FUNCTION    : t_Function    := EBREAK_FUNCT7 & EBREAK_FUNCT3;
 
-end package libriscp_inst_defs;
+end package inst_defs;
 
-package body libriscp_inst_defs is
-end package body libriscp_inst_defs;
+package body inst_defs is
+end package body inst_defs;

@@ -31,9 +31,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.libriscp_common.all;
-use work.libriscp_inst_types.all;
+library libriscp;
+use libriscp.common.all;
+use libriscp.inst_types.all;
 
 entity DMem is
     Port (

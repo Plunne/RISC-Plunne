@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/20/2025 09:33:04 PM
+-- Create Date: 02/15/2025 09:18:37 PM
 -- Design Name: 
--- Module Name: RISC_Plunne - arch_RISC_Plunne
+-- Module Name: Adder_Full - arch_Adder_Full
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,36 +31,35 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.all;
-
-library libriscp;
-use libriscp.common.all;
-use libriscp.MUX_OpSel;
-
-entity RISC_Plunne is
-
+entity Adder_Full is
     Port (
-        -- Clock
-        i_CLK : in std_logic;
-        
-        ------------------
-        -- Memory Ports --
-        ------------------
-        -- Instruction Memory
-        i_IMem_port : std_logic_vector (XLENM1 downto 0);
-        o_IMem_addr : std_logic_vector (XLENM1 downto 0);
-        -- Data Memory
-        o_DMem_port : std_logic_vector (XLENM1 downto 0);
-        o_DMem_addr : std_logic_vector (XLENM1 downto 0)
-        --io_XregsMemory
+        A : in STD_LOGIC;
+        B : in STD_LOGIC;
+        Cin : in STD_LOGIC;
+        S : out STD_LOGIC;
+        Cout : out STD_LOGIC
     );
+end Adder_Full;
 
-end RISC_Plunne;
-
-architecture arch_RISC_Plunne of RISC_Plunne is
-
+architecture arch_Adder_Full of Adder_Full is
+    
+    signal s_A_xor_B        : std_logic;
+    signal s_AxorB_and_Cin  : std_logic;
+    signal s_A_and_B        : std_logic;
+    
 begin
 
-
-end arch_RISC_Plunne;
+    -- First Gate XOR
+    s_A_xor_B <= A xor B;
+    
+    -- Last Gate XOR to S  
+    S <= s_A_xor_B xor Cin;
+    
+    -- AND Gates to OR Gate
+    s_AxorB_and_Cin <= s_A_xor_B and Cin;
+    s_A_and_B       <= A and B;
+    
+    -- OR Gate to Cout
+    Cout <= s_AxorB_and_Cin or s_A_and_B;
+    
+end arch_Adder_Full;

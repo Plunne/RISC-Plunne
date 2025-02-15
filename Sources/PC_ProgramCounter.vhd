@@ -31,8 +31,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.libriscp_common.all;
+library libriscp;
+use libriscp.common.all;
 
 entity PC is
     Port (
@@ -43,7 +43,7 @@ entity PC is
         i_INCR : in std_logic;
 
         -- PC Output
-        o_PC : out std_logic_vector(XLENM1 downto 0);
+        o_PC : out std_logic_vector(XLENM1 downto 0)
     );
 end PC;
 

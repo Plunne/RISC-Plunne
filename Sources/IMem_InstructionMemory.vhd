@@ -31,8 +31,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.libriscp_common.all;
+library libriscp;
+use libriscp.common.all;
 
 entity IMem is
     Port (
@@ -54,7 +54,7 @@ end IMem;
 architecture arch_InstructionMemory of IMem is
     
     type t_IMemStack is array (0 to XLENM1) of std_logic_vector(XLENM1 downto 0);
-    signal r_Buffer : t_IMemStack;
+    signal s_Buffer : t_IMemStack;
 
 begin
 
@@ -62,7 +62,7 @@ begin
     begin
 
         if rising_edge(i_CLK) then
-            -- r_Buffer()
+            -- IMem
         end if;
 
     end process p_IMem;

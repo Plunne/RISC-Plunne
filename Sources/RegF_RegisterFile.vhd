@@ -31,9 +31,9 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library work;
-use work.libriscp_common.all;
-use work.libriscp_inst_types.all;
+library libriscp;
+use libriscp.common.all;
+use libriscp.inst_types.all;
 
 entity RegF is
     Port (
@@ -66,12 +66,16 @@ begin
     
         if rising_edge(i_CLK) then
             
+            -- Get Rs1 and Rs2
+            s_Xreg(to_integer(unsigned(i_rs1))) <= i_Rs1;
+            s_Xreg(to_integer(unsigned(i_rs2))) <= i_Rs2;
+            
             -- Fill Rd from Write-Back
             s_Xreg(to_integer(unsigned(i_rd))) <= i_WriteBack;
             
             -- Send operands to ALU
             o_OpA <= s_Xreg(to_integer(unsigned(i_rs1)));
-            o_OpB <= s_Xreg(to_integer(unsigned(i_rs2))); 
+            o_OpB <= s_Xreg(to_integer(unsigned(i_rs2)));
             
         end if;
         

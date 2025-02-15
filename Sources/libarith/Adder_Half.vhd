@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/22/2025 05:21:11 AM
+-- Create Date: 02/15/2025 09:12:12 PM
 -- Design Name: 
--- Module Name: BU - arch_BranchUnit
+-- Module Name: Adder_Half - arch_Adder_Half
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,16 +31,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library libriscp;
-use libriscp.common.all;
+entity Adder_Half is
+    Port ( A : in STD_LOGIC;
+           B : in STD_LOGIC;
+           S : out STD_LOGIC;
+           Cout : out STD_LOGIC);
+end Adder_Half;
 
-entity BU is
---  Port ( );
-end BU;
-
-architecture arch_BranchUnit of BU is
-
+architecture arch_Adder_Half of Adder_Half is
+    
 begin
 
+    S       <= A xor B;
+    Cout    <= A and B;
 
-end arch_BranchUnit;
+end arch_Adder_Half;

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02/04/2025 09:23:47 PM
+-- Create Date: 02/15/2025 09:59:11 PM
 -- Design Name: 
--- Module Name: libriscp_common - Behavioral
+-- Module Name: common - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,13 +31,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-package libriscp_common is
+package common is
+
+---------------
+-- ARCH SIZE --
+---------------
 
 constant XLEN   : integer := 32;
 constant XLENM1 : integer := XLEN -1;
 
-end package libriscp_common;
+----------
+-- NULL --
+----------
 
-package body libriscp_common is
+constant X32_NULL : std_logic_vector(XLENM1 downto 0) := X"00000000";
 
-end package body libriscp_common;
+-------------
+-- BOOLEAN --
+-------------
+
+constant X32_TRUE   : std_logic_vector(XLENM1 downto 0) := X"00000001";
+constant X32_FALSE  : std_logic_vector(XLENM1 downto 0) := X"00000000";
+
+end package common;
+
+package body common is
+end package body common;
