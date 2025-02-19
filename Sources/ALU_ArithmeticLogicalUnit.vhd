@@ -65,10 +65,39 @@ entity ALU is
 end ALU;
 
 architecture arch_ArithmeticLogicalUnit of ALU is
-
+    
+    ----------------
+    -- COMPONENTS --
+    ----------------
+    
+    component Adder_32 is
+        port (
+            A32     : in std_logic_vector(XLENM1 downto 0);
+            B32     : in std_logic_vector(XLENM1 downto 0);
+            Cin     : in std_logic);
+            S       : out std_logic_vector(XLENM1 downto 0);
+            Cout    : out std_logic
+        );
+    end component;
+    
+    -------------
+    -- SIGNALS --
+    -------------
+    
     signal s_ArithBuffer : std_logic_vector(XLENM1 downto 0) := X32_NULL;
+    signal s_AdderResult : std_logic_vector(XLENM1 downto 0) := X32_NULL;
 
 begin
+    
+    ---------------------------
+    -- COMPONENT DECLARATION --
+    ---------------------------
+    
+    c_ALU_Adder : Adder_32 port map(A32 => i_OpA, B32 => i_OpB, i_Flags(0), S => s_AdderResult, o_Flags(0));
+
+    -------------
+    -- PROCESS --
+    -------------
 
     p_ALU: process(i_CLK)
     begin
@@ -85,7 +114,7 @@ begin
                     
                     -- ADD
                     when ADD_FUNCTION =>
-                        --o_Result <= i_OpA + i_OpB;
+                        o_Result <= s_AdderResult;
                     
                     -- SUB
                     when SUB_FUNCTION =>

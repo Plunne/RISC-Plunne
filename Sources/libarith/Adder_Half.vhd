@@ -32,10 +32,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Adder_Half is
-    Port ( A : in STD_LOGIC;
-           B : in STD_LOGIC;
-           S : out STD_LOGIC;
-           Cout : out STD_LOGIC);
+    Port (
+        A : in std_logic;
+        B : in std_logic;
+        S : out std_logic;
+        Cout : out std_logic
+    );
 end Adder_Half;
 
 architecture arch_Adder_Half of Adder_Half is
