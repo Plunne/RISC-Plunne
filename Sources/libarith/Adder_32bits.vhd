@@ -52,11 +52,11 @@ architecture arch_Adder_32bits of Adder_32 is
     
     component Adder_Full is
         port (
-            A : in STD_LOGIC;
-            B : in STD_LOGIC;
-            Cin : in STD_LOGIC;
-            S : out STD_LOGIC;
-            Cout : out STD_LOGIC
+            A : in std_logic;
+            B : in std_logic;
+            Cin : in std_logic;
+            S : out std_logic;
+            Cout : out std_logic
         );
     end component;
     

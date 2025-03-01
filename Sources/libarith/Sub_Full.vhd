@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02/15/2025 09:18:37 PM
+-- Create Date: 03/01/2025 05:22:28 PM
 -- Design Name: 
--- Module Name: Adder_Full - arch_Adder_Full
+-- Module Name: Sub_Full - arch_Sub_Full
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -32,47 +32,47 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 library libarith;
-use libarith.Adder_Half;
+use libarith.Sub_Half;
 
-entity Adder_Full is
+entity Sub_Full is
     Port (
         A : in std_logic;
         B : in std_logic;
-        Cin : in std_logic;
-        S : out std_logic;
-        Cout : out std_logic
+        Bin : in std_logic;
+        D : out std_logic;
+        Bout : out std_logic
     );
-end Adder_Full;
+end Sub_Full;
 
-architecture arch_Adder_Full of Adder_Full is
-    
+architecture arch_Sub_Full of Sub_Full is
+
     ----------------
     -- COMPONENTS --
     ----------------
     
-    component Adder_Half is
-    port (
-        A : in std_logic;
-        B : in std_logic;
-        S : out std_logic;
-        Cout : out std_logic
-    );
+    component Sub_Half is
+        port (
+            A : in std_logic;
+            B : in std_logic;
+            D : out std_logic;
+            Bout : out std_logic
+        );
     end component;
     
     -------------
     -- SIGNALS --
     -------------
     
-    signal s_S1_to_A2       : std_logic;
-    signal s_Cout1_to_Or1   : std_logic;
-    signal s_Cout2_to_Or2   : std_logic;
+    signal s_D1_to_A2       : std_logic;
+    signal s_Bout1_to_Or1   : std_logic;
+    signal s_Bout2_to_Or2   : std_logic;
     
 begin
 
-AH1 : Adder_Half port map(A => A,           B => B,     S => s_S1_to_A2,    Cout => s_Cout1_to_Or1);
-AH2 : Adder_Half port map(A => s_S1_to_A2,  B => Cin,   S => S,             Cout => s_Cout2_to_Or2);
+SH1 : Sub_Half port map(A => A,             B => B,     D => s_D1_to_A2,    Bout => s_Bout1_to_Or1);
+SH2 : Sub_Half port map(A => s_D1_to_A2,    B => Bin,   D => D,             Bout => s_Bout2_to_Or2);
 
--- Last Carry
-Cout <= s_Cout1_to_Or1 or s_Cout2_to_Or2;
-    
-end arch_Adder_Full;
+-- Last Borrow
+Bout <= s_Bout1_to_Or1 and s_Bout2_to_Or2;
+
+end arch_Sub_Full;
