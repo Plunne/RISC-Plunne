@@ -56,7 +56,7 @@ entity ALU is
         i_Funct7 : in t_Funct7;
         
         -- Flags
-        i_Flags : out std_logic_vector(2 downto 0); -- input status (ex. carry)
+        i_Flags : in std_logic_vector(2 downto 0); -- input status (ex. carry)
         o_Flags : out std_logic_vector(2 downto 0); -- output status (ex. carry)
         
         -- Output Data
@@ -74,7 +74,7 @@ architecture arch_ArithmeticLogicalUnit of ALU is
         port (
             A32     : in std_logic_vector(XLENM1 downto 0);
             B32     : in std_logic_vector(XLENM1 downto 0);
-            Cin     : in std_logic);
+            Cin     : in std_logic;
             S       : out std_logic_vector(XLENM1 downto 0);
             Cout    : out std_logic
         );
@@ -89,11 +89,17 @@ architecture arch_ArithmeticLogicalUnit of ALU is
 
 begin
     
-    ---------------------------
-    -- COMPONENT DECLARATION --
-    ---------------------------
+    ----------------------------
+    -- COMPONENTS DECLARATION --
+    ----------------------------
     
-    c_ALU_Adder : Adder_32 port map(A32 => i_OpA, B32 => i_OpB, i_Flags(0), S => s_AdderResult, o_Flags(0));
+    c_ALU_Adder : Adder_32 port map (
+        A32     => i_OpA,
+        B32     => i_OpB,
+        Cin     => i_Flags(0),
+        S       => s_AdderResult,
+        Cout    => o_Flags(0)
+    );
 
     -------------
     -- PROCESS --

@@ -50,8 +50,18 @@ constant X32_NULL : std_logic_vector(XLENM1 downto 0) := X"00000000";
 -- BOOLEAN --
 -------------
 
+-- 1 Bit
+constant BIT_TRUE   : std_logic := '1';
+constant BIT_FALSE  : std_logic := '0';
+-- 32 bits
 constant X32_TRUE   : std_logic_vector(XLENM1 downto 0) := X"00000001";
 constant X32_FALSE  : std_logic_vector(XLENM1 downto 0) := X"00000000";
+
+--------
+-- PC --
+--------
+
+constant PC_INCREMENT : std_logic_vector(XLENM1 downto 0) := X"00000004";
 
 end package common;
 

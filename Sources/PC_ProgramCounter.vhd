@@ -48,10 +48,60 @@ entity PC is
 end PC;
 
 architecture arch_ProgramCounter of PC is
+
+    ----------------
+    -- COMPONENTS --
+    ----------------
     
-    signal r_ProgramCounter : std_logic_vector(XLENM1 downto 0);
+    component Adder_32 is
+        port (
+            A32     : in std_logic_vector(XLENM1 downto 0);
+            B32     : in std_logic_vector(XLENM1 downto 0);
+            Cin     : in std_logic;
+            S       : out std_logic_vector(XLENM1 downto 0);
+            Cout    : out std_logic
+        );
+    end component;
+    
+    -------------
+    -- SIGNALS --
+    -------------
+    
+    signal s_ProgramCounter     : std_logic_vector(XLENM1 downto 0);
+    signal s_AdderResult        : std_logic_vector(XLENM1 downto 0) := X32_NULL;
 
 begin
 
+    ----------------------------
+    -- COMPONENTS DECLARATION --
+    ----------------------------
+    
+    c_PC_Adder : Adder_32 port map (
+        A32     => s_ProgramCounter,
+        B32     => PC_INCREMENT,
+        Cin     => BIT_FALSE,
+        S       => s_AdderResult,
+        Cout    => open
+    );
+
+    -------------
+    -- PROCESS --
+    -------------
+    
+    p_PC: process(i_CLK)
+    begin
+    
+        if rising_edge(i_CLK) then
+            
+            if i_INCR = '1' then
+                s_ProgramCounter <= s_AdderResult; -- Increment PC
+            end if;
+        
+        end if;
+        
+    end process p_PC;
+    
+    -- Return ProgramCounter to PC Output
+    o_PC <= s_ProgramCounter;
 
 end arch_ProgramCounter;
