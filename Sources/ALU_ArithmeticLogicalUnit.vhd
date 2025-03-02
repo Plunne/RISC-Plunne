@@ -75,8 +75,18 @@ architecture arch_ArithmeticLogicalUnit of ALU is
             A32     : in std_logic_vector(XLENM1 downto 0);
             B32     : in std_logic_vector(XLENM1 downto 0);
             Cin     : in std_logic;
-            S       : out std_logic_vector(XLENM1 downto 0);
+            S32     : out std_logic_vector(XLENM1 downto 0);
             Cout    : out std_logic
+        );
+    end component;
+    
+    component Sub_32 is
+        port (
+            A32     : in std_logic_vector(XLENM1 downto 0);
+            B32     : in std_logic_vector(XLENM1 downto 0);
+            Bin     : in std_logic;
+            D32     : out std_logic_vector(XLENM1 downto 0);
+            Bout    : out std_logic
         );
     end component;
     
@@ -84,8 +94,9 @@ architecture arch_ArithmeticLogicalUnit of ALU is
     -- SIGNALS --
     -------------
     
-    signal s_ArithBuffer : std_logic_vector(XLENM1 downto 0) := X32_NULL;
-    signal s_AdderResult : std_logic_vector(XLENM1 downto 0) := X32_NULL;
+    signal s_ArithBuffer    : std_logic_vector(XLENM1 downto 0) := X32_NULL;
+    signal s_AdderResult    : std_logic_vector(XLENM1 downto 0) := X32_NULL;
+    signal s_SubResult      : std_logic_vector(XLENM1 downto 0) := X32_NULL;
 
 begin
     
@@ -97,8 +108,16 @@ begin
         A32     => i_OpA,
         B32     => i_OpB,
         Cin     => i_Flags(0),
-        S       => s_AdderResult,
+        S32     => s_AdderResult,
         Cout    => o_Flags(0)
+    );
+    
+    c_ALU_Sub : Sub_32 port map (
+        A32     => i_OpA,
+        B32     => i_OpB,
+        Bin     => i_Flags(0),
+        D32     => s_SubResult,
+        Bout    => o_Flags(0)
     );
 
     -------------
@@ -124,7 +143,7 @@ begin
                     
                     -- SUB
                     when SUB_FUNCTION =>
-                        --o_Result <= i_OpA - i_OpB;
+                        o_Result <= s_SubResult;
                     
                     -- XOR
                     when XOR_FUNCTION =>
