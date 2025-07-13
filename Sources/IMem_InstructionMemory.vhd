@@ -37,24 +37,21 @@ use libriscp.common.all;
 entity IMem is
     Port (
         -- Clock
-        i_CLK : std_logic;
+        i_CLK : in std_logic;
         
         -- Program Counter
         i_PC : std_logic_vector (XLENM1 to 0);
         
-        -- Instruction Address
-        i_InstAddr : in std_logic_vector (XLENM1 downto 0);
+        -- IMem Instruction Fetch
+        i_IMem_Data : in std_logic_vector (XLENM1 downto 0);
+        o_IMem_Addr : out std_logic_vector (XLENM1 downto 0);
         
-        -- Instruction Ports
-        i_Instruction : in std_logic_vector (XLENM1 downto 0);
+        -- Instruction Fetched
         o_Instruction : out std_logic_vector (XLENM1 downto 0)
     );
 end IMem;
 
 architecture arch_InstructionMemory of IMem is
-    
-    type t_IMemStack is array (0 to XLENM1) of std_logic_vector(XLENM1 downto 0);
-    signal s_Buffer : t_IMemStack;
 
 begin
 
@@ -62,7 +59,10 @@ begin
     begin
 
         if rising_edge(i_CLK) then
-            -- IMem
+        
+            o_IMem_Addr <= i_PC;
+            o_Instruction <= i_IMem_Data;
+            
         end if;
 
     end process p_IMem;

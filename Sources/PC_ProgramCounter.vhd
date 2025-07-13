@@ -41,6 +41,15 @@ entity PC is
 
         -- PC Increment
         i_INCR : in std_logic;
+        
+        -- PC Set
+        i_SET : in std_logic_vector(XLENM1 downto 0);
+        
+        -- PC Write Enable
+        i_WREN : in std_logic;
+        
+        -- PC Reset
+        i_RST : in std_logic;
 
         -- PC Output
         o_PC : out std_logic_vector(XLENM1 downto 0)
@@ -88,13 +97,20 @@ begin
     -- PROCESS --
     -------------
     
-    p_PC: process(i_CLK)
+    p_PC : process(i_CLK)
     begin
     
         if rising_edge(i_CLK) then
             
             if i_INCR = '1' then
                 s_ProgramCounter <= s_AdderResult; -- Increment PC
+            
+            elsif i_WREN = '1' then
+                s_ProgramCounter <= i_SET; -- Set PC
+            
+            elsif i_RST = '1' then
+                s_ProgramCounter <= X32_NULL; -- Reset PC
+                
             end if;
         
         end if;

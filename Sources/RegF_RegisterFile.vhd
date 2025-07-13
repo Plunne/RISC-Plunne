@@ -38,19 +38,19 @@ use libriscp.inst_types.all;
 entity RegF is
     Port (
         -- Clock
-        i_CLK : std_logic;
+        i_CLK : in std_logic;
     
         -- Registers Storage
-        i_rd    : in t_Rd;
-        i_rs1   : in t_Rs1;
-        i_rs2   : in t_Rs2;
+        i_Rd    : in t_Rd;
+        i_Rs1   : in t_Rs1;
+        i_Rs2   : in t_Rs2;
         
         -- Write-Back
         i_WriteBack : in std_logic_vector(XLENM1 downto 0);
         
         -- Operands to ALU (Content of Rs1 and Rs2)
-        o_OpA : out std_logic_vector(XLENM1 downto 0);
-        o_OpB : out std_logic_vector(XLENM1 downto 0)
+        o_XregA : out std_logic_vector(XLENM1 downto 0);
+        o_XregB : out std_logic_vector(XLENM1 downto 0)
     );
 end RegF;
 
@@ -67,15 +67,15 @@ begin
         if rising_edge(i_CLK) then
             
             -- Get Rs1 and Rs2
-            s_Xreg(to_integer(unsigned(i_rs1))) <= i_Rs1;
-            s_Xreg(to_integer(unsigned(i_rs2))) <= i_Rs2;
+            s_Xreg(to_integer(unsigned(i_Rs1))) <= i_Rs1;
+            s_Xreg(to_integer(unsigned(i_Rs2))) <= i_Rs2;
             
             -- Fill Rd from Write-Back
-            s_Xreg(to_integer(unsigned(i_rd))) <= i_WriteBack;
+            s_Xreg(to_integer(unsigned(i_Rd))) <= i_WriteBack;
             
             -- Send operands to ALU
-            o_OpA <= s_Xreg(to_integer(unsigned(i_rs1)));
-            o_OpB <= s_Xreg(to_integer(unsigned(i_rs2)));
+            o_XregA <= s_Xreg(to_integer(unsigned(i_Rs1)));
+            o_XregB <= s_Xreg(to_integer(unsigned(i_Rs2)));
             
         end if;
         

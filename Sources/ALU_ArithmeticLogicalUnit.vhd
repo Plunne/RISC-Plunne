@@ -42,7 +42,7 @@ use libarith.all;
 entity ALU is
     Port (
         -- Clock
-        i_CLK : std_logic;
+        i_CLK : in std_logic;
         
         -- Operands (Content of Rs1 and Rs2)
         i_OpA : in std_logic_vector(XLENM1 downto 0); -- rs1
