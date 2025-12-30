@@ -15,7 +15,9 @@ They are organized like :
 - Core REQ and TB files are respectively named `REQ_Core` and `TB_Core`.
 
 ## Requierements Convention
-- Requierements IDs shall starts with a R followed by 3 digits (e.g. R023)
+- Requierements shall have a REQ_ID
+- Requierements REQ_IDs shall start with a R followed by 3 digits (e.g. R023)
+- Requierements shall be named with the prefix `<module_abbreviation>` followed by the REQ_ID (e.g. IMem_R023)
 - Requierements shall have a Title and a Description
 - Requierements shall have a creation date and a creator
 - Requierements shall have an edition date and the editor
@@ -26,7 +28,9 @@ They are organized like :
 
 
 ## Tests-Benches Convention
+- Tests-Benches shall have a TB_ID
 - Tests-Benches IDs shall starts with TB followed by 3 digits (e.g. TB014)
+- Tests-Benches shall be named with the prefix `<module_abbreviation>` followed by the TB_ID (e.g. IMem_TB014)
 - Tests-Benches shall have a Title and a Procedure
 - Tests-Benches shall be linked to one requierement or more
 - Tests-Benches shall have a creation date and a creator
