@@ -1,0 +1,36 @@
+# RISC-P - DOCUMENTATION
+
+Here are located all documentation files.
+
+They are organized like :
+- A directory for each modules of the CPU
+- Those directories shall be named with the prefix `<module_abbreviation>` followed by the module name (e.g. ALU_ArithmeticLogicalUnit)
+- Inside those directories, there are a file for Requierements and another for Test-Benches (more could be added in the future)
+- Requierements files shall be named with the prefix `REQ_` followed by the module name (e.g. REQ_ArithmeticLogicalUnit)
+- Test-Benches files shall be named with the prefix `TB_` followed by the module name (e.g. TB_ArithmeticLogicalUnit)
+- Requierements and Test-Benches file are currently written in Markdown following a project convention.
+- Exception for Multiplexers, a directory `MUX` is in place for all Multiplexers.
+- Multiplexers sub-directories shall be name with the prefix `<mux_abbreviation>` followed by the mux name (e.g. OpSel_OperandsSelector)
+- Exception for Core, the directory is named Core.
+- Core REQ and TB files are respectively named `REQ_Core` and `TB_Core`.
+
+## Requierements Convention
+- Requierements IDs shall starts with a R followed by 3 digits (e.g. R023)
+- Requierements shall have a Title and a Description
+- Requierements shall have a creation date and a creator
+- Requierements shall have an edition date and the editor
+- Requierements shall have a status (WIP, ACCEPTED, WAITING)
+- Requierements shall be WIP when in progress
+- Requierements shall be ACCEPTED when has been accepted for implementation
+- Requierements shall be WAITING when is ready to be reviewed
+
+
+## Tests-Benches Convention
+- Tests-Benches IDs shall starts with TB followed by 3 digits (e.g. TB014)
+- Tests-Benches shall have a Title and a Procedure
+- Tests-Benches shall be linked to one requierement or more
+- Tests-Benches shall have a creation date and a creator
+- Tests-Benches shall have a test date and the tester
+- Tests-Benches shall have a status (PASSED or FAILED)
+- Tests-Benches shall be PASSED when the test passed
+- Tests-Benches shall be FAILED when the test failed
