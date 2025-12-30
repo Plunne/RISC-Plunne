@@ -1,0 +1,52 @@
+# ======================================================
+# RISC-Plunne - Gitignore
+# ======================================================
+
+# Ignore everything by default
+*
+
+# ------------------------------------------------------
+# Git essentials
+# ------------------------------------------------------
+!.gitignore
+!README.md
+!LICENSE
+
+# -----------------------------
+# Include Documentation
+# -----------------------------
+!Docs/
+!Docs/**
+
+# -----------------------------
+# Include Blog
+# -----------------------------
+!Blog/
+!Blog/**
+
+# -----------------------------
+# Include Vivado project
+# -----------------------------
+!Sources/
+!Sources/*.xpr
+
+# -----------------------------
+# Include RTL sources
+# -----------------------------
+!Sources/rtl/
+!Sources/rtl/**
+
+# -----------------------------
+# Include Simulation sources
+# -----------------------------
+!Sources/sim/
+!Sources/sim/**
+
+# ======================================================
+# Notes:
+# 1) Everything not explicitly included above is ignored
+# 2) All Vivado generated files are excluded
+#    automatically 
+# 3) New RTL or TB files under rtl/ or sim/ are tracked
+#    automatically
+# ======================================================
