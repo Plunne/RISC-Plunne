@@ -20,17 +20,17 @@ They are organized like :
 - All sources files names shall be the corresponding entity name in lowercase
 - All architectures shall be the entity name with the prefix `arch_` (e.g. arch_RegF)
 
-| Module              | File     | Entity | Architecture |
-|:------------------- |:-------- |:------ |:------------ |
-| Core                | core.vhd | Core   | arch_Core    |
-| ALU                 | alu.vhd  | ALU    | arch_ALU     |
-| Register File       | regf.vhd | RegF   | arch_RegF    |
-| Immediate Unit      | immu.vhd | ImmU   | arch_ImmU    |
-| Instruction Decode  | idcd.vhd | IDcd   | arch_IDcd    |
-| Instruction Memory  | imem.vhd | IMem   | arch_IMem    |
-| Data Memory         | dmem.vhd | DMem   | arch_DMem    |
-| Branch Control Unit | bcu.vhd  | BCU    | arch_BCU     |
-| Program Counter     | pc.vhd   | PC     | arch_PC      |
+| Module                  | Fichier  | Entité | Architecture |
+| :---------------------- | :------- | :----- | :----------- |
+| Core                    | core.vhd | Core   | arch_Core    |
+| Arithmetic Logical Unit | alu.vhd  | ALU    | arch_ALU     |
+| Branch Control Unit     | bcu.vhd  | BCU    | arch_BCU     |
+| Data Memory             | dmem.vhd | DMem   | arch_DMem    |
+| Immediate Unit          | immu.vhd | ImmU   | arch_ImmU    |
+| Instruction Decode      | idcd.vhd | IDcd   | arch_IDcd    |
+| Instruction Memory      | imem.vhd | IMem   | arch_IMem    |
+| Program Counter         | pc.vhd   | PC     | arch_PC      |
+| Register File           | regf.vhd | RegF   | arch_RegF    |
 
 ## Requierements Convention
 - Requierements shall have a REQ_ID
@@ -43,7 +43,6 @@ They are organized like :
 - Requierements shall be WIP when in progress
 - Requierements shall be ACCEPTED when has been accepted for implementation
 - Requierements shall be WAITING when is ready to be reviewed
-
 
 ## Tests-Benches Convention
 - Tests-Benches shall have a TB_ID
