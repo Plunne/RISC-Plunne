@@ -14,6 +14,20 @@ They are organized like :
 - Exception for Core, the directory is named Core.
 - Core REQ and TB files are respectively named `REQ_Core` and `TB_Core`.
 
+## Modules
+| Module              | File     | Entity | Architecture |
+|:------------------- |:-------- |:------ |:------------ |
+| Core                | core.vhd | Core   | arch_Core    |
+| ALU                 | alu.vhd  | ALU    | arch_ALU     |
+| Register File       | regf.vhd | RegF   | arch_RegF    |
+| Immediate Unit      | immu.vhd | ImmU   | arch_ImmU    |
+| Instruction Decode  | idcd.vhd | IDcd   | arch_IDcd    |
+| Instruction Memory  | imem.vhd | IMem   | arch_IMem    |
+| Data Memory         | dmem.vhd | DMem   | arch_DMem    |
+| Branch Control Unit | bcu.vhd  | BCU    | arch_BCU     |
+| Program Counter     | pc.vhd   | PC     | arch_PC      |
+
+
 ## Requierements Convention
 - Requierements shall have a REQ_ID
 - Requierements REQ_IDs shall start with a R followed by 3 digits (e.g. R023)
