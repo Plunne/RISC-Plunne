@@ -17,8 +17,11 @@ They are organized like :
 ## Modules Convention
 - Entities names of modules shall consist of an abbreviation of the module name from 2 to 4 letters
 - In entities names, each word of the module name first letter shall be in uppercase, the rest shall be in lower case (e.g. Register File = RegF)
-- All sources files names shall be the corresponding entity name in lowercase
-- All architectures shall be the entity name with the prefix `arch_` (e.g. arch_RegF)
+- All entity sources files names shall be the corresponding entity name in lowercase
+- All entities architectures shall be the entity name with the prefix `arch_` (e.g. arch_RegF)
+- All tests-benches sources files names shall be the corresponding entity name in lowercase with the prefix `tb_`
+- All tests-benches entities names shall be the corresponding file name in lowercase
+- All tests-benches architectures shall be the test-bench file name with the prefix `arch_` (e.g. arch_RegF)
 
 | Module                  | Fichier  | Entité | Architecture |
 | :---------------------- | :------- | :----- | :----------- |
@@ -44,14 +47,15 @@ They are organized like :
 - Requierements shall be ACCEPTED when has been accepted for implementation
 - Requierements shall be WAITING when is ready to be reviewed
 
-## Tests-Benches Convention
-- Tests-Benches shall have a TB_ID
-- Tests-Benches IDs shall starts with TB followed by 3 digits (e.g. TB014)
-- Tests-Benches shall be named with the prefix `<module_abbreviation>` followed by the TB_ID (e.g. IMem_TB014)
-- Tests-Benches shall have a Title and a Procedure
-- Tests-Benches shall be linked to one requierement or more
-- Tests-Benches shall have a creation date and a creator
-- Tests-Benches shall have a test date and the tester
-- Tests-Benches shall have a status (PASSED or FAILED)
-- Tests-Benches shall be PASSED when the test passed
-- Tests-Benches shall be FAILED when the test failed
+## Tests Convention
+- Tests Cases shall have a type (U=Unit, I=Integration, V=Validation)
+- Tests Cases shall have a Tx_ID 
+- Tx_ID shall starts with the `Tx` prefix where x is the test type letter followed by 3 digits (e.g. TI014 for Test Integration 14)
+- Tests Cases shall be named with the prefix `<module_abbreviation>` followed by the Tx_ID (e.g. IMem_TI014)
+- Tests Cases shall have a Title and a Procedure
+- Tests Cases shall be linked to one requierement or more
+- Tests Cases shall have a creation date and a creator
+- Tests Cases shall have a test date and the tester
+- Tests Cases shall have a status (PASSED or FAILED)
+- Tests Cases shall be PASSED when the test passed
+- Tests Cases shall be FAILED when the test failed
