@@ -14,7 +14,12 @@ They are organized like :
 - Exception for Core, the directory is named Core.
 - Core REQ and TB files are respectively named `REQ_Core` and `TB_Core`.
 
-## Modules
+## Modules Convention
+- Entities names of modules shall consist of an abbreviation of the module name from 2 to 4 letters
+- In entities names, each word of the module name first letter shall be in uppercase, the rest shall be in lower case (e.g. Register File = RegF)
+- All sources files names shall be the corresponding entity name in lowercase
+- All architectures shall be the entity name with the prefix `arch_` (e.g. arch_RegF)
+
 | Module              | File     | Entity | Architecture |
 |:------------------- |:-------- |:------ |:------------ |
 | Core                | core.vhd | Core   | arch_Core    |
@@ -26,14 +31,6 @@ They are organized like :
 | Data Memory         | dmem.vhd | DMem   | arch_DMem    |
 | Branch Control Unit | bcu.vhd  | BCU    | arch_BCU     |
 | Program Counter     | pc.vhd   | PC     | arch_PC      |
-
-
-## Naming Convention
-- Entities names of modules shall consist of an abbreviation of the module name from 2 to 4 letters
-- In entities names, each word of the module name first letter shall be in uppercase, the rest shall be in lower case (e.g. Register File = RegF)
-- All sources files names shall be the corresponding entity name in lowercase
-- All architectures shall be the entity name with the prefix `arch_` (e.g. arch_RegF)
-
 
 ## Requierements Convention
 - Requierements shall have a REQ_ID
