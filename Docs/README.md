@@ -28,7 +28,7 @@ They are organized like :
 | Program Counter     | pc.vhd   | PC     | arch_PC      |
 
 
-## Convention
+## Naming Convention
 - Entities names of modules shall consist of an abbreviation of the module name from 2 to 4 letters
 - In entities names, each word of the module name first letter shall be in uppercase, the rest shall be in lower case (e.g. Register File = RegF)
 - All sources files names shall be the corresponding entity name in lowercase
