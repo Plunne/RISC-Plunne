@@ -7,7 +7,9 @@ They are organized like :
 - Those directories shall be named with the prefix `<module_abbreviation>` followed by the module name (e.g. ALU_ArithmeticLogicalUnit)
 - Inside those directories, there are a file for Requierements and another for Test-Benches (more could be added in the future)
 - Requierements files shall be named with the prefix `REQ_` followed by the module name (e.g. REQ_ArithmeticLogicalUnit)
-- Test-Benches files shall be named with the prefix `TB_` followed by the module name (e.g. TB_ArithmeticLogicalUnit)
+- Test-Benches files for unit tests shall be named with the prefix `TU_` followed by the module name (e.g. TU_ArithmeticLogicalUnit)
+- Test-Benches files for integration tests shall be named with the prefix `TI_` followed by the module name (e.g. TI_ArithmeticLogicalUnit)
+- Test-Benches files for validation tests shall be named with the prefix `TV_` followed by the module name (e.g. TV_ArithmeticLogicalUnit)
 - Requierements and Test-Benches file are currently written in Markdown following a project convention.
 - Exception for Multiplexers, a directory `MUX` is in place for all Multiplexers.
 - Multiplexers sub-directories shall be name with the prefix `<mux_abbreviation>` followed by the mux name (e.g. OpSel_OperandsSelector)
