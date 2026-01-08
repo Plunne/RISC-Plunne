@@ -31,17 +31,16 @@ Verify that when the `SET` signal is asserted, the PC is updated to the value of
 
 Linked to: PC_R004, PC_R005, PC_R006
 
-| Step | Procedure                                       | Expectations                                                             |
-|-----:|:------------------------------------------------|:-------------------------------------------------------------------------|
-|    1 | Ensure clock is equal to 0                      | Clock is equal to 0                                                      |
-|    2 | Ensure `RST` input is equal to 0                | `RST` input is equal to 0                                                |
-|    3 | Ensure `INCR` input is equal to 0               | `INCR` input is equal to 0                                               |
-|    4 | Set `NEW` to a test address different to the PC | `NEW` input holds the test adress that is not equal to PC address        |
-|    5 | Set `SET` high for a stable period              | `SET` input has been set to 1; PC output remains unchanged               |
-|    6 | Raise clock for a stable period                 | PC output updates to the value of `NEW`; `SET` input is still equal to 1 |
-|    7 | Lower clock for a stable period                 | PC output remains unchanged                                              |
-|    8 | Set `SET` low for a stable period               | `SET` input has been set to 0; PC output remains unchanged               |
-|    9 | Proceed multiple stable clock cycles            | PC output remains unchanged                                              |
+| Step | Procedure                                            | Expectations                                                      |
+|-----:|:-----------------------------------------------------|:------------------------------------------------------------------|
+|    1 | Ensure clock is equal to 0                           | Clock is equal to 0                                               |
+|    2 | Ensure `RST`, `INCR` and `SET` inputs are equal to 0 | `RST`, `INCR` and `SET` inputs are equal to 0                     |
+|    3 | Set `NEW` to a test address different to the PC      | `NEW` input holds the test adress that is not equal to PC address |
+|    4 | Set `SET` high for a stable period                   | `SET` input has been set to 1; PC output remains unchanged        |
+|    5 | Raise clock for a stable period                      | PC output updates to `NEW`; `SET` input is still equal to 1       |
+|    6 | Lower clock for a stable period                      | PC output remains unchanged                                       |
+|    7 | Set `SET` low for a stable period                    | `SET` input has been set to 0; PC output remains unchanged        |
+|    8 | Proceed multiple stable clock cycles                 | PC output remains unchanged                                       |
 
 ## PC_TU003 - RESET VALUE INITIALIZATION
 
@@ -53,17 +52,16 @@ Verify that when the `RST` signal is asserted, the PC is set to `PC_RST` at the 
 
 Linked to: PC_R007, PC_R008, PC_R009
 
-| Step | Procedure                                   | Expectations                                                   |
-|-----:|:--------------------------------------------|:---------------------------------------------------------------|
-|    1 | Ensure clock is equal to 0                  | Clock is equal to 0                                            |
-|    2 | Ensure `INCR` input is equal to 0           | `INCR` input is equal to 0                                     |
-|    3 | Ensure `RST` input is equal to 0            | `RST` input is equal to 0                                      |
-|    4 | Ensure PC output is different from `PC_RST` | PC output is different from `PC_RST`                           |
-|    5 | Set `RST` high for a stable period          | `RST` input has been set to 1; PC output remains unchanged     |
-|    6 | Raise clock for a stable period             | PC output updates to `PC_RST`; `RST` input is still equal to 1 |
-|    7 | Lower clock for a stable period             | PC output remains unchanged                                    |
-|    8 | Set `RST` low for a stable period           | `RST` input has been set to 0; PC output remains unchanged     |
-|    9 | Proceed multiple stable clock cycles        | PC output remains unchanged                                    |
+| Step | Procedure                                            | Expectations                                                   |
+|-----:|:-----------------------------------------------------|:---------------------------------------------------------------|
+|    1 | Ensure clock is equal to 0                           | Clock is equal to 0                                            |
+|    2 | Ensure `RST`, `INCR` and `SET` inputs are equal to 0 | `RST`, `INCR` and `SET` inputs are equal to 0                  |
+|    3 | Ensure PC output is different from `PC_RST`          | PC output is different from `PC_RST`                           |
+|    4 | Set `RST` high for a stable period                   | `RST` input has been set to 1; PC output remains unchanged     |
+|    5 | Raise clock for a stable period                      | PC output updates to `PC_RST`; `RST` input is still equal to 1 |
+|    6 | Lower clock for a stable period                      | PC output remains unchanged                                    |
+|    7 | Set `RST` low for a stable period                    | `RST` input has been set to 0; PC output remains unchanged     |
+|    8 | Proceed multiple stable clock cycles                 | PC output remains unchanged                                    |
 
 
 ## PC_TU004 - INCREMENT VALUE UPDATE
@@ -76,16 +74,16 @@ Verify that when the `INCR` signal is asserted, the PC is incremented by `PC_INC
 
 Linked to: PC_R010, PC_R011, PC_R012
 
-| Step | Procedure                                        | Expectations                                                        |
-|-----:|:-------------------------------------------------|:--------------------------------------------------------------------|
-|    1 | Ensure clock is equal to 0                       | Clock is equal to 0                                                 |
-|    2 | Ensure `RST` input is equal to 0                 | `RST` input is equal to 0                                           |
-|    3 | Ensure `INCR` input is equal to 1                | `INCR` input has been set to 1                                      |
-|    4 | Capture the current PC output                    | PC output is equal to a valid address                               |
-|    5 | Raise clock for a stable period                  | PC output increments by `PC_INCR`, `INCR` input is still equal to 1 |
-|    6 | Lower clock for a stable period                  | PC output remains unchanged                                         |
-|    7 | Set `INCR` low for a stable period               | `INCR` input has been set to 0; PC output remains unchanged         |
-|    8 | Proceed multiple clock cycles with stable states | PC output remains unchanged                                         |
+| Step | Procedure                                            | Expectations                                                        |
+|-----:|:-----------------------------------------------------|:--------------------------------------------------------------------|
+|    1 | Ensure clock is equal to 0                           | Clock is equal to 0                                                 |
+|    2 | Ensure `RST`, `INCR` and `SET` inputs are equal to 0 | `RST`, `INCR` and `SET` inputs are equal to 0                       |
+|    4 | Capture the current PC output                        | PC output is equal to a valid address                               |
+|    3 | Set `INCR` high for a stable period                  | `INCR` input has been set to 1; PC output remains unchanged         |
+|    5 | Raise clock for a stable period                      | PC output increments by `PC_INCR`, `INCR` input is still equal to 1 |
+|    6 | Lower clock for a stable period                      | PC output remains unchanged                                         |
+|    7 | Set `INCR` low for a stable period                   | `INCR` input has been set to 0; PC output remains unchanged         |
+|    8 | Proceed multiple clock cycles with stable states     | PC output remains unchanged                                         |
 
 ## PC_TU005 - INCREMENT HOLD CONDITION
 
@@ -97,11 +95,9 @@ Verify that when the `INCR` signal is deasserted, the PC retains its current val
 
 Linked to: PC_R013
 
-| Step | Procedure                                | Expectations                |
-|-----:|:-----------------------------------------|:----------------------------|
-|    1 | Ensure clock is equal to 0               | Clock is equal to 0         |
-|    2 | Ensure `RST` input is equal to 0         | `RST` input is equal to 0   |
-|    3 | Ensure `INCR` input is equal to 0        | `INCR` input is equal to 0  |
-|    5 | Raise clock for a stable period          | PC output remains unchanged |
-|    6 | Lower clock for a stable period          | PC output remains unchanged |
-|    7 | Optionally toggle `INCR` to 0 repeatedly | PC output remains unchanged |
+| Step | Procedure                                            | Expectations                                  |
+|-----:|:-----------------------------------------------------|:----------------------------------------------|
+|    1 | Ensure clock is equal to 0                           | Clock is equal to 0                           |
+|    2 | Ensure `RST`, `SET` and `INCR` inputs are equal to 0 | `RST`, `SET` and `INCR` inputs are equal to 0 |
+|    3 | Raise clock for a stable period                      | PC output remains unchanged                   |
+|    4 | Lower clock for a stable period                      | PC output remains unchanged                   |
