@@ -40,26 +40,118 @@ end tb_pc;
 
 architecture arch_tb_pc of tb_pc is
 
-    constant TB_PC_INCR : std_logic_vector(TB_XLENM1 downto 0) := X"00000004";
+    -- Test Step
+    signal s_TestStep : integer := 0;
     
+    -- Unit Signals
     signal s_CLK        : std_logic := '0';
     signal s_RST        : std_logic := '0';
     signal s_INCR       : std_logic := '0';
     signal s_SP_EN      : std_logic := '0';
     signal s_SP_ADDR    : tbt_Word := TB_X32_NULL;
     signal s_PC         : tbt_Word := TB_X32_NULL;
+    
+    -- Constants
+    constant TB_PC_INCR : std_logic_vector(TB_XLENM1 downto 0) := X"00000004";
+    constant TB_PC_TEST : std_logic_vector(TB_XLENM1 downto 0) := X"abcd5678";
 
 begin
 
+    --------------------------------------------------------------------
+    -- Unit Under Test
+    --------------------------------------------------------------------
+    
     uut: entity work.pc port map (
-            CLK     => s_CLK,
-            RST     => s_RST,
-            INCR    => s_INCR,
-            SP_EN   => s_SP_EN,
-            SP_ADDR => s_SP_ADDR,
-            PC      => s_PC
+        CLK     => s_CLK,
+        RST     => s_RST,
+        INCR    => s_INCR,
+        SP_EN   => s_SP_EN,
+        SP_ADDR => s_SP_ADDR,
+        PC      => s_PC
     );
+    
+    --------------------------------------------------------------------
+    -- PC_TU002 - SET POINTER UPDATE
+    --------------------------------------------------------------------
+    
+    test_pc_tu002 : process
+    
+        variable pc_tmp : tbt_Word := TB_X32_NULL;
+    
+    begin
 
-
+        report "PC_TU002 - SET POINTER UPDATE"; -- PC_R004, PC_R005, PC_R006
+             
+        -- Steps 1 & 2 : Init CLK
+        s_TestStep <= 1;
+        s_CLK   <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_CLK = '0'
+            report "PC_TU002 STEP 1 FAIL : CLK not 0"
+            severity error;
+        
+        -- Steps 2 : Init RST, INCR, SP_EN
+        s_TestStep <= 2;
+        s_RST   <= '0';
+        s_INCR  <= '0';
+        s_SP_EN <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_RST = '0' and s_INCR = '0' and s_SP_EN = '0'
+            report "PC_TU002 STEP 2 FAIL : Control Signals not 0"
+            severity error;
+        
+        -- Step 3 : Set SP_ADDR
+        s_TestStep <= 3;
+        s_SP_ADDR <= TB_PC_TEST;
+        wait for CLK_PERIOD;
+        
+        assert s_SP_ADDR = TB_PC_TEST
+            report "PC_TU002 STEP 3 FAIL : SP_ADDR not holding new address"
+            severity error;
+        
+        -- Step 4 : Assert SP_EN, no clock edge
+        s_TestStep <= 4;
+        pc_tmp := s_PC;
+        s_SP_EN <= '1';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = pc_tmp
+            report "PC_TU002 STEP 4 FAIL : PC changed before rising edge"
+            severity error;
+        
+        -- Step 5 : Rising edge -> PC must update
+        s_TestStep <= 5;
+        s_CLK <= '1';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = TB_PC_TEST
+            report "PC_TU002 STEP 5 FAIL : PC not updated to SP_ADDR on rising edge"
+            severity error;
+        
+        -- Step 6 : Falling edge -> PC must stay stable
+        s_TestStep <= 6;
+        s_CLK <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = TB_PC_TEST
+            report "PC_TU002 STEP 6 FAIL : PC changed after falling edge"
+            severity error;
+        
+        -- Step 7 : Deassert SP_EN
+        s_TestStep <= 7;
+        s_SP_EN <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = TB_PC_TEST
+            report "PC_TU002 STEP 7 FAIL : PC changed after SP_EN deassertion"
+            severity error;
+        
+        -- End of Test
+        report "PC_TU002 PASSED" severity note;
+        wait for CLK_PERIOD;
+    
+    end process test_pc_tu002;
 
 end arch_tb_pc;
