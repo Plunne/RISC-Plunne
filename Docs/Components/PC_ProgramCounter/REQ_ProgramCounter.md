@@ -38,31 +38,31 @@ Tested by : PC_TU001
 
 ## PC_R004 - SET POINTER SIGNAL PRESENCE
 
-PC shall have an input signal `SET` to set the PC.
+PC shall have an input signal `SP_EN` to set the PC.
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2026/01/08  | 2026/01/08  | `APPROVED` |  2026/01/08   | Plunne      | Plunne        |
+| Plunne  |  2026/01/08  | 2026/01/18  | `APPROVED` |  2026/01/18   | Plunne      | Plunne        |
 
 Tested by : PC_TU002
 
 ## PC_R005 - SET POINTER VALUE
 
-PC shall have an input signal named `NEW` that holds the address to set the PC.
+PC shall have an input signal named `SP_ADDR` that holds the address to set the PC.
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2026/01/08  | 2026/01/08  | `APPROVED` |  2026/01/08   | Plunne      | Plunne        |
+| Plunne  |  2026/01/08  | 2026/01/18  | `APPROVED` |  2026/01/18   | Plunne      | Plunne        |
 
 Tested by : PC_TU002
 
 ## PC_R006 - SET POINTER CONDITION
 
-When the `SET` signal is asserted, PC shall be set to `NEW`.
+When the `SP_EN` signal is asserted, PC shall be set to `SP_ADDR`.
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2026/01/08  | 2026/01/08  | `APPROVED` |  2026/01/08   | Plunne      | Plunne        |
+| Plunne  |  2026/01/08  | 2026/01/18  | `APPROVED` |  2026/01/18   | Plunne      | Plunne        |
 
 Tested by : PC_TU002
 
@@ -146,8 +146,8 @@ Set Pointer behavior shall take priority over `INCR` but not over `RST`.
 
 ## PC_R015 - RESET PRIORITY
 
-Reset behavior shall take priority over `INCR` and `SET` signal behavior.
+Reset behavior shall take priority over `INCR` and `SP_EN` signal behavior.
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2025/12/31  | 2025/12/31  | `APPROVED` |  2025/12/31   | Plunne      | Plunne        |
+| Plunne  |  2025/12/31  | 2026/01/18  | `APPROVED` |  2026/01/18   | Plunne      | Plunne        |

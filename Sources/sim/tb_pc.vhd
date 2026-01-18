@@ -31,13 +31,35 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
+library work;
+use work.tb_common_pkg.all;
+use work.tb_helpers_pkg.all;
+
 entity tb_pc is
---  Port ( );
 end tb_pc;
 
 architecture arch_tb_pc of tb_pc is
 
+    constant TB_PC_INCR : std_logic_vector(TB_XLENM1 downto 0) := X"00000004";
+    
+    signal s_CLK        : std_logic := '0';
+    signal s_RST        : std_logic := '0';
+    signal s_INCR       : std_logic := '0';
+    signal s_SP_EN      : std_logic := '0';
+    signal s_SP_ADDR    : tbt_Word := TB_X32_NULL;
+    signal s_PC         : tbt_Word := TB_X32_NULL;
+
 begin
+
+    uut: entity work.pc port map (
+            CLK     => s_CLK,
+            RST     => s_RST,
+            INCR    => s_INCR,
+            SP_EN   => s_SP_EN,
+            SP_ADDR => s_SP_ADDR,
+            PC      => s_PC
+    );
+
 
 
 end arch_tb_pc;

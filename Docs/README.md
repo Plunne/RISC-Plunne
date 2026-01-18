@@ -61,3 +61,5 @@ They are organized like :
 - Tests Cases shall have a status (PASSED or FAILED)
 - Tests Cases shall be PASSED when the test passed
 - Tests Cases shall be FAILED when the test failed
+- Tests Cases shall print the Tx_ID followed by the test name
+- Tests Cases shall print the requierements linked to it
