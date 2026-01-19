@@ -6,20 +6,19 @@ Program Counter unit tests
 
 -----
 
-## PC_TU001 - PC ADDRESS VALIDITY
+## PC_TU001 - PC ADDRESS SIZE
 
-Verify that the PC output always represents a valid instruction address.
+Verify that the PC output size is equal to `XLEN` .
 
 | Creator | Created Date | Edited Date | Status        | Last Test  | Last Tester | Last Approver |
 |:--------|:------------:|:-----------:|:--------------|:----------:|:------------|:--------------|
-| Plunne  |  2026/01/03  | 2026/01/03  | `IN_PROGRESS` | 2026/01/03 | Plunne      | Plunne        |
+| Plunne  |  2026/01/03  | 2026/01/19  | `IN_PROGRESS` | 2026/01/03 | Plunne      | Plunne        |
 
-Linked to: PC_R001, PC_R002, PC_R003
+Linked to: PC_R001
 
-| Step | Procedure                                        | Expectations                             |
-|-----:|:-------------------------------------------------|:-----------------------------------------|
-|    1 | Ensure clock is equal to 0                       | Clock is equal to 0                      |
-|    2 | Proceed multiple clock cycles with stable states | PC output is a valid instruction address |
+| Step | Procedure                                  | Expectations               |
+|-----:|:-------------------------------------------|:---------------------------|
+|    1 | Check that PC output size is equal to XLEN | `PC` size is equal to XLEN |
 
 ## PC_TU002 - SET POINTER UPDATE
 
@@ -91,16 +90,15 @@ Verify that when the `INCR` signal is deasserted, the PC retains its current val
 
 | Creator | Created Date | Edited Date | Status        | Last Test  | Last Tester | Last Approver |
 |:--------|:------------:|:-----------:|:--------------|:----------:|:------------|:--------------|
-| Plunne  |  2026/01/03  | 2026/01/18  | `IN_PROGRESS` | 2026/01/03 | Plunne      | Plunne        |
+| Plunne  |  2026/01/03  | 2026/01/19  | `IN_PROGRESS` | 2026/01/03 | Plunne      | Plunne        |
 
-Linked to: PC_R013
+Linked to: PC_R013, PC_R002, PC_R003
 
 | Step | Procedure                                              | Expectations                                    |
 |-----:|:-------------------------------------------------------|:------------------------------------------------|
 |    1 | Ensure clock is equal to 0                             | Clock is equal to 0                             |
 |    2 | Ensure `RST`, `SP_EN` and `INCR` inputs are equal to 0 | `RST`, `SP_EN` and `INCR` inputs are equal to 0 |
-|    3 | Raise clock for a stable period                        | PC output remains unchanged                     |
-|    4 | Lower clock for a stable period                        | PC output remains unchanged                     |
+|    3 | Proceed multiple clock cycles                          | PC output remains unchanged                     |
 
 ## PC_TU006 - SET POINTER PRIORITY OVER INCREMENT
 

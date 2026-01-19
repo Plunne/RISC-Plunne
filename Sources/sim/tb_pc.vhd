@@ -71,6 +71,28 @@ begin
     );
     
     --------------------------------------------------------------------
+    -- PC_TU001 - PC ADDRESS SIZE
+    --------------------------------------------------------------------
+    
+    test_pc_tu001 : process
+    
+    begin
+    
+    report "PC_TU001 - PC ADDRESS SIZE"; -- PC_R001
+    
+    -- Step 1 : Check PC size is equal to XLEN
+    s_TestStep <= 1;
+    wait for CLK_PERIOD;
+    assert s_PC'length = TB_XLEN
+        report "PC_TU001 STEP 1 FAIL : PC size does not match XLEN"
+        severity error;
+
+    report "PC_TU001 PASSED" severity note;
+    wait;
+    
+    end process test_pc_tu001;
+    
+    --------------------------------------------------------------------
     -- PC_TU002 - SET POINTER UPDATE
     --------------------------------------------------------------------
     
@@ -150,7 +172,7 @@ begin
         
         -- End of Test
         report "PC_TU002 PASSED" severity note;
-        wait for CLK_PERIOD;
+        wait;
     
     end process test_pc_tu002;
 

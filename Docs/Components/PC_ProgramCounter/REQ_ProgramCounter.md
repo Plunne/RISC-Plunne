@@ -12,7 +12,7 @@ PC instruction size shall be equal to XLEN.
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2025/12/31  | 2025/12/31  | `APPROVED` |  2025/12/31   | Plunne      | Plunne        |
+| Plunne  |  2025/12/31  | 2025/01/19  | `APPROVED` |  2025/01/19   | Plunne      | Plunne        |
 
 Tested by : PC_TU001
 
@@ -22,19 +22,19 @@ PC output shall remain stable between clock edges.
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2025/12/31  | 2025/12/31  | `APPROVED` |  2025/12/31   | Plunne      | Plunne        |
+| Plunne  |  2025/12/31  | 2025/01/19  | `APPROVED` |  2025/01/19   | Plunne      | Plunne        |
 
-Tested by : PC_TU001
+Tested by : PC_TU005
 
 ## PC_R003 - HOLDING ADDRESS OF CURRENT INSTRUCTION
 
 PC shall always hold the address of the current instruction.
 
-Tested by : PC_TU001
+Tested by : PC_TU005
 
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
-| Plunne  |  2025/12/31  | 2025/12/31  | `APPROVED` |  2025/12/31   | Plunne      | Plunne        |
+| Plunne  |  2025/12/31  | 2025/01/19  | `APPROVED` |  2025/01/19   | Plunne      | Plunne        |
 
 ## PC_R004 - SET POINTER SIGNAL PRESENCE
 
