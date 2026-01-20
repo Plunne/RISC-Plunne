@@ -123,9 +123,10 @@ begin
         assert s_RST = '0' and s_INCR = '0' and s_SP_EN = '0'
             report "PC_TU002 STEP 2 FAIL : Control Signals not 0"
             severity error;
-        
-        -- Step 3 : Set SP_ADDR
+               
+        -- Step 3 : Set SP_ADDR to a different address than PC
         s_TestStep <= 3;
+        pc_tmp := s_PC; -- Save for future steps
         s_SP_ADDR <= TB_PC_TEST;
         wait for CLK_PERIOD;
         
@@ -133,11 +134,18 @@ begin
             report "PC_TU002 STEP 3 FAIL : SP_ADDR not holding new address"
             severity error;
         
-        -- Step 4 : Assert SP_EN, no clock edge
+        assert not (s_PC = s_SP_ADDR)
+            report "PC_TU002 STEP 3 FAIL : PC is at the test address"
+            severity error;
+        
+        -- Step 4 : Capture PC, Set SP_EN -> PC shall not change
         s_TestStep <= 4;
-        pc_tmp := s_PC;
         s_SP_EN <= '1';
         wait for CLK_PERIOD;
+        
+        assert s_SP_EN = '1'
+            report "PC_TU002 STEP 4 FAIL : SP_EN has not been set"
+            severity error;
         
         assert s_PC = pc_tmp
             report "PC_TU002 STEP 4 FAIL : PC changed before rising edge"
@@ -155,25 +163,297 @@ begin
         -- Step 6 : Falling edge -> PC must stay stable
         s_TestStep <= 6;
         s_CLK <= '0';
+        pc_tmp := s_PC;
         wait for CLK_PERIOD;
         
-        assert s_PC = TB_PC_TEST
+        assert s_PC = pc_tmp
             report "PC_TU002 STEP 6 FAIL : PC changed after falling edge"
             severity error;
         
-        -- Step 7 : Deassert SP_EN
+        -- Step 7 : Unset SP_EN
         s_TestStep <= 7;
         s_SP_EN <= '0';
         wait for CLK_PERIOD;
         
-        assert s_PC = TB_PC_TEST
-            report "PC_TU002 STEP 7 FAIL : PC changed after SP_EN deassertion"
+        assert s_SP_EN = '0'
+            report "PC_TU002 STEP 7 FAIL : SP_EN not 0"
             severity error;
+        
+        -- Step 8 : Proceed multiple clock cycles
+        s_TestStep <= 8;
+        for i in 1 to 3 loop
+        
+            tick(s_CLK);
+           
+            assert s_PC = pc_tmp
+                report "PC_TU002 STEP 8 FAIL : PC changed during clock cycle"
+                severity error;
+                
+        end loop;
         
         -- End of Test
         report "PC_TU002 PASSED" severity note;
         wait;
     
     end process test_pc_tu002;
+    
+    --------------------------------------------------------------------
+    -- PC_TU003 - RESET POINTER UPDATE
+    --------------------------------------------------------------------
+    
+    test_pc_tu003 : process
+    
+        variable pc_tmp : tbt_Word := TB_X32_NULL;
+    
+    begin
+
+        report "PC_TU003 - RESET POINTER UPDATE"; -- PC_R007, PC_R008, PC_R009
+             
+        -- Steps 1 & 2 : Init CLK
+        s_TestStep <= 1;
+        s_CLK   <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_CLK = '0'
+            report "PC_TU003 STEP 1 FAIL : CLK not 0"
+            severity error;
+        
+        -- Steps 2 : Init RST, INCR, SP_EN
+        s_TestStep <= 2;
+        s_RST   <= '0';
+        s_INCR  <= '0';
+        s_SP_EN <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_RST = '0' and s_INCR = '0' and s_SP_EN = '0'
+            report "PC_TU003 STEP 2 FAIL : Control Signals not 0"
+            severity error;
+        
+        -- Step 3 : Ensure PC not at reset address
+        s_TestStep <= 3;
+        pc_tmp := s_PC; -- Save for future steps
+        wait for CLK_PERIOD;
+        
+        assert not (s_PC = TB_PC_RST)
+            report "PC_TU003 STEP 3 FAIL : PC is already at reset address"
+            severity error;
+        
+        -- Step 4 : Set RST -> PC shall not change
+        s_TestStep <= 4;
+        s_RST <= '1';
+        wait for CLK_PERIOD;
+        
+        assert s_RST = '1'
+            report "PC_TU003 STEP 4 FAIL : RST has not been set"
+            severity error;
+        
+        assert s_PC = pc_tmp
+            report "PC_TU003 STEP 4 FAIL : PC changed before rising edge"
+            severity error;
+        
+        -- Step 5 : Rising edge -> PC must update
+        s_TestStep <= 5;
+        s_CLK <= '1';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = TB_PC_RST
+            report "PC_TU003 STEP 5 FAIL : PC not updated to reset address on rising edge"
+            severity error;
+        
+        -- Step 6 : Falling edge -> PC must stay stable
+        s_TestStep <= 6;
+        s_CLK <= '0';
+        pc_tmp := s_PC;
+        wait for CLK_PERIOD;
+        
+        assert s_PC = pc_tmp
+            report "PC_TU003 STEP 6 FAIL : PC changed after falling edge"
+            severity error;
+        
+        -- Step 7 : Unset RST
+        s_TestStep <= 7;
+        s_RST <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_RST = '0'
+            report "PC_TU003 STEP 7 FAIL : RST not 0"
+            severity error;
+        
+        -- Step 8 : Proceed multiple clock cycles
+        s_TestStep <= 8;
+        for i in 1 to 3 loop
+        
+            tick(s_CLK);
+           
+            assert s_PC = pc_tmp
+                report "PC_TU003 STEP 8 FAIL : PC changed during clock cycle"
+                severity error;
+                
+        end loop;
+        
+        -- End of Test
+        report "PC_TU003 PASSED" severity note;
+        wait;
+    
+    end process test_pc_tu003;
+    
+    --------------------------------------------------------------------
+    -- PC_TU004 - INCREMENT POINTER UPDATE
+    --------------------------------------------------------------------
+    
+    test_pc_tu004 : process
+    
+        variable pc_tmp : tbt_Word := TB_X32_NULL;
+    
+    begin
+
+        report "PC_TU004 - INCREMENT POINTER UPDATE"; -- PC_R010, PC_R011, PC_R012
+             
+        -- Steps 1 & 2 : Init CLK
+        s_TestStep <= 1;
+        s_CLK   <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_CLK = '0'
+            report "PC_TU004 STEP 1 FAIL : CLK not 0"
+            severity error;
+        
+        -- Steps 2 : Init RST, INCR, SP_EN
+        s_TestStep <= 2;
+        s_RST   <= '0';
+        s_INCR  <= '0';
+        s_SP_EN <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_RST = '0' and s_INCR = '0' and s_SP_EN = '0'
+            report "PC_TU004 STEP 2 FAIL : Control Signals not 0"
+            severity error;
+        
+        -- Step 3 : Capture PC output
+        s_TestStep <= 3;
+        pc_tmp := s_PC;
+        wait for CLK_PERIOD;
+        
+        assert pc_tmp = s_PC
+            report "PC_TU004 STEP 3 FAIL : PC has not been captured"
+            severity error;
+        
+        -- Step 4 : Set INCR -> PC shall not change
+        s_TestStep <= 4;
+        s_INCR <= '1';
+        wait for CLK_PERIOD;
+        
+        assert s_INCR = '1'
+            report "PC_TU004 STEP 4 FAIL : INCR has not been set"
+            severity error;
+        
+        assert s_PC = pc_tmp
+            report "PC_TU004 STEP 4 FAIL : PC changed before rising edge"
+            severity error;
+        
+        -- Step 5 : Rising edge -> PC must update
+        s_TestStep <= 5;
+        s_CLK <= '1';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = (pc_tmp + TB_PC_INCR)
+            report "PC_TU004 STEP 5 FAIL : PC has not been incremented"
+            severity error;
+        
+        -- Step 6 : Falling edge -> PC must stay stable
+        s_TestStep <= 6;
+        pc_tmp := s_PC;
+        s_CLK <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_PC = pc_tmp
+            report "PC_TU004 STEP 6 FAIL : PC changed after falling edge"
+            severity error;
+        
+        -- Step 7 : Unset INCR
+        s_TestStep <= 7;
+        s_INCR <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_INCR = '0'
+            report "PC_TU004 STEP 7 FAIL : INCR not 0"
+            severity error;
+        
+        -- Step 8 : Proceed multiple clock cycles
+        s_TestStep <= 8;
+        for i in 1 to 3 loop
+        
+            tick(s_CLK);
+           
+            assert s_PC = pc_tmp
+                report "PC_TU004 STEP 8 FAIL : PC changed during clock cycle"
+                severity error;
+                
+        end loop;
+        
+        -- End of Test
+        report "PC_TU004 PASSED" severity note;
+        wait;
+    
+    end process test_pc_tu004;
+    
+    --------------------------------------------------------------------
+    -- PC_TU005 - POINTER HOLD CONDITION
+    --------------------------------------------------------------------
+    
+    test_pc_tu005 : process
+    
+        variable pc_tmp : tbt_Word := TB_X32_NULL;
+    
+    begin
+
+        report "PC_TU005 - POINTER HOLD CONDITION"; -- PC_R013, PC_R002, PC_R003
+             
+        -- Steps 1 & 2 : Init CLK
+        s_TestStep <= 1;
+        s_CLK   <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_CLK = '0'
+            report "PC_TU005 STEP 1 FAIL : CLK not 0"
+            severity error;
+        
+        -- Steps 2 : Init RST, INCR, SP_EN
+        s_TestStep <= 2;
+        s_RST   <= '0';
+        s_INCR  <= '0';
+        s_SP_EN <= '0';
+        wait for CLK_PERIOD;
+        
+        assert s_RST = '0' and s_INCR = '0' and s_SP_EN = '0'
+            report "PC_TU005 STEP 2 FAIL : Control Signals not 0"
+            severity error;
+            
+        -- Step 3 : Capture PC output
+        s_TestStep <= 3;
+        pc_tmp := s_PC;
+        wait for CLK_PERIOD;
+        
+        assert pc_tmp = s_PC
+            report "PC_TU005 STEP 3 FAIL : PC Capture failed"
+            severity error;
+        
+        -- Step 4 : Proceed multiple clock cyles
+        s_TestStep <= 4;
+        for i in 1 to 3 loop
+        
+            tick(s_CLK);
+           
+            assert s_PC = pc_tmp
+                report "PC_TU005 STEP 4 FAIL : PC changed during clock cycle"
+                severity error;
+                
+        end loop;
+        
+        -- End of Test
+        report "PC_TU005 PASSED" severity note;
+        wait;
+    
+    end process test_pc_tu005;
 
 end arch_tb_pc;

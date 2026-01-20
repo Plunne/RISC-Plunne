@@ -26,7 +26,7 @@ Verify that when the `SP_EN` signal is asserted, the PC is updated to the value 
 
 | Creator | Created Date | Edited Date | Status        | Last Test  | Last Tester | Last Approver |
 |:--------|:------------:|:-----------:|:--------------|:----------:|:------------|:--------------|
-| Plunne  |  2026/01/08  | 2026/01/18  | `IN_PROGRESS` | 2026/01/18 | Plunne      | Plunne        |
+| Plunne  |  2026/01/08  | 2026/01/20  | `IN_PROGRESS` | 2026/01/18 | Plunne      | Plunne        |
 
 Linked to: PC_R004, PC_R005, PC_R006
 
@@ -84,13 +84,13 @@ Linked to: PC_R010, PC_R011, PC_R012
 |    7 | Set `INCR` low for a stable period                     | `INCR` input has been set to 0; PC output remains unchanged         |
 |    8 | Proceed multiple clock cycles with stable states       | PC output remains unchanged                                         |
 
-## PC_TU005 - INCREMENT HOLD CONDITION
+## PC_TU005 - POINTER HOLD CONDITION
 
-Verify that when the `INCR` signal is deasserted, the PC retains its current value.
+When control signals are deasserted, the PC retains its current value.
 
 | Creator | Created Date | Edited Date | Status        | Last Test  | Last Tester | Last Approver |
 |:--------|:------------:|:-----------:|:--------------|:----------:|:------------|:--------------|
-| Plunne  |  2026/01/03  | 2026/01/19  | `IN_PROGRESS` | 2026/01/03 | Plunne      | Plunne        |
+| Plunne  |  2026/01/03  | 2026/01/20  | `IN_PROGRESS` | 2026/01/03 | Plunne      | Plunne        |
 
 Linked to: PC_R013, PC_R002, PC_R003
 
@@ -98,7 +98,8 @@ Linked to: PC_R013, PC_R002, PC_R003
 |-----:|:-------------------------------------------------------|:------------------------------------------------|
 |    1 | Ensure clock is equal to 0                             | Clock is equal to 0                             |
 |    2 | Ensure `RST`, `SP_EN` and `INCR` inputs are equal to 0 | `RST`, `SP_EN` and `INCR` inputs are equal to 0 |
-|    3 | Proceed multiple clock cycles                          | PC output remains unchanged                     |
+|    3 | Capture the current PC output                          | PC output is equal to a valid address           |
+|    4 | Proceed multiple clock cycles                          | PC output remains unchanged                     |
 
 ## PC_TU006 - SET POINTER PRIORITY OVER INCREMENT
 
