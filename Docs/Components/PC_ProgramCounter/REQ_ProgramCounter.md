@@ -144,6 +144,8 @@ Set Pointer behavior shall take priority over `INCR` but not over `RST`.
 |:--------|:------------:|:-----------:|:----------:|:--------------|:------------|:--------------|
 | Plunne  |  2026/01/08  | 2026/01/08  | `APPROVED` | 2026/01/08    | Plunne      | Plunne        |
 
+Tested by : PC_TU006
+
 ## PC_R015 - RESET PRIORITY
 
 Reset behavior shall take priority over `INCR` and `SP_EN` signal behavior.
@@ -151,3 +153,5 @@ Reset behavior shall take priority over `INCR` and `SP_EN` signal behavior.
 | Creator | Created Date | Edited Date |   Status   | Last APPROVED | Last Editor | Last Approver |
 |:--------|:------------:|:-----------:|:----------:|:-------------:|:------------|:--------------|
 | Plunne  |  2025/12/31  | 2026/01/18  | `APPROVED` |  2026/01/18   | Plunne      | Plunne        |
+
+Tested by : PC_TU007
