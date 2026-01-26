@@ -69,34 +69,57 @@ begin
         SP_ADDR => s_SP_ADDR,
         PC      => s_PC
     );
+
+    --------------------------------------------------------------------
+    -- STIMULUS
+    --------------------------------------------------------------------
+    
+    stimulus : process
+
+    begin
+
+        report "==== PC TESTBENCH ====" severity note;
+
+        test_pc_tu001;  -- PC ADDRESS SIZE
+        test_pc_tu002;  -- SET POINTER
+        test_pc_tu003;  -- RESET
+        test_pc_tu004;  -- INCREMENT
+        test_pc_tu005;  -- HOLD
+        test_pc_tu006;  -- SP PRIORITY
+        test_pc_tu007;  -- RST PRIORITY
+
+        report "==== PC : ALL TESTS PASSED ====" severity note;
+        wait;
+
+    end process;
     
     --------------------------------------------------------------------
     -- PC_TU001 - PC ADDRESS SIZE
     --------------------------------------------------------------------
     
-    test_pc_tu001 : process
+    procedure test_pc_tu001 is
     
     begin
     
-    report "PC_TU001 - PC ADDRESS SIZE"; -- PC_R001
-    
-    -- Step 1 : Check PC size is equal to XLEN
-    s_TestStep <= 1;
-    wait for CLK_PERIOD;
-    assert s_PC'length = TB_XLEN
-        report "PC_TU001 STEP 1 FAIL : PC size does not match XLEN"
-        severity error;
+        report "PC_TU001 - PC ADDRESS SIZE"; -- PC_R001
+        
+        -- Step 1 : Check PC size is equal to XLEN
+        s_TestStep <= 1;
+        wait for CLK_PERIOD;
+        assert s_PC'length = TB_XLEN
+            report "PC_TU001 STEP 1 FAIL : PC size does not match XLEN"
+            severity error;
 
-    report "PC_TU001 PASSED" severity note;
-    wait;
+        report "PC_TU001 PASSED" severity note;
+        wait;
     
-    end process test_pc_tu001;
+    end procedure test_pc_tu001;
     
     --------------------------------------------------------------------
     -- PC_TU002 - SET POINTER UPDATE
     --------------------------------------------------------------------
     
-    test_pc_tu002 : process
+    procedure test_pc_tu002 is
     
         variable pc_tmp : tbt_Word := TB_X32_NULL;
     
@@ -195,13 +218,13 @@ begin
         report "PC_TU002 PASSED" severity note;
         wait;
     
-    end process test_pc_tu002;
+    end procedure test_pc_tu002;
     
     --------------------------------------------------------------------
     -- PC_TU003 - RESET POINTER UPDATE
     --------------------------------------------------------------------
     
-    test_pc_tu003 : process
+    test_pc_tu003 : procedure
     
         variable pc_tmp : tbt_Word := TB_X32_NULL;
     
@@ -295,13 +318,13 @@ begin
         report "PC_TU003 PASSED" severity note;
         wait;
     
-    end process test_pc_tu003;
+    end procedure test_pc_tu003;
     
     --------------------------------------------------------------------
     -- PC_TU004 - INCREMENT POINTER UPDATE
     --------------------------------------------------------------------
     
-    test_pc_tu004 : process
+    test_pc_tu004 : procedure
     
         variable pc_tmp : tbt_Word := TB_X32_NULL;
     
@@ -395,13 +418,13 @@ begin
         report "PC_TU004 PASSED" severity note;
         wait;
     
-    end process test_pc_tu004;
+    end procedure test_pc_tu004;
     
     --------------------------------------------------------------------
     -- PC_TU005 - POINTER HOLD CONDITION
     --------------------------------------------------------------------
     
-    test_pc_tu005 : process
+    test_pc_tu005 : procedure
     
         variable pc_tmp : tbt_Word := TB_X32_NULL;
     
@@ -454,13 +477,13 @@ begin
         report "PC_TU005 PASSED" severity note;
         wait;
     
-    end process test_pc_tu005;
+    end procedure test_pc_tu005;
 
     --------------------------------------------------------------------
     -- PC_TU006 - SET POINTER PRIORITY
     --------------------------------------------------------------------
 
-    test_pc_tu006 : process
+    test_pc_tu006 : procedure
 
         variable pc_tmp : tbt_Word := TB_X32_NULL;
 
@@ -561,114 +584,114 @@ begin
         report "PC_TU006 PASSED" severity note;
         wait;
 
-    end process test_pc_tu006;
+    end procedure test_pc_tu006;
 
     --------------------------------------------------------------------
--- PC_TU007 - RESET POINTER PRIORITY
---------------------------------------------------------------------
+    -- PC_TU007 - RESET POINTER PRIORITY
+    --------------------------------------------------------------------
 
-test_pc_tu007 : process
+    test_pc_tu007 : procedure
 
-    variable pc_tmp : tbt_Word := TB_X32_NULL;
+        variable pc_tmp : tbt_Word := TB_X32_NULL;
 
-begin
+    begin
 
-    report "PC_TU007 - RESET POINTER PRIORITY"; -- PC_R015
+        report "PC_TU007 - RESET POINTER PRIORITY"; -- PC_R015
 
-    -- Step 1 : Ensure clock is equal to 0
-    s_TestStep <= 1;
-    s_CLK <= '0';
-    wait for CLK_PERIOD;
+        -- Step 1 : Ensure clock is equal to 0
+        s_TestStep <= 1;
+        s_CLK <= '0';
+        wait for CLK_PERIOD;
 
-    assert s_CLK = '0'
-        report "PC_TU007 STEP 1 FAIL : CLK not 0"
-        severity error;
+        assert s_CLK = '0'
+            report "PC_TU007 STEP 1 FAIL : CLK not 0"
+            severity error;
 
-    -- Step 2 : Ensure RST, SP_EN and INCR inputs are equal to 0
-    s_TestStep <= 2;
-    s_RST   <= '0';
-    s_SP_EN <= '0';
-    s_INCR  <= '0';
-    wait for CLK_PERIOD;
+        -- Step 2 : Ensure RST, SP_EN and INCR inputs are equal to 0
+        s_TestStep <= 2;
+        s_RST   <= '0';
+        s_SP_EN <= '0';
+        s_INCR  <= '0';
+        wait for CLK_PERIOD;
 
-    assert s_RST = '0' and s_SP_EN = '0' and s_INCR = '0'
-        report "PC_TU007 STEP 2 FAIL : Control signals not 0"
-        severity error;
+        assert s_RST = '0' and s_SP_EN = '0' and s_INCR = '0'
+            report "PC_TU007 STEP 2 FAIL : Control signals not 0"
+            severity error;
 
-    -- Step 3 : Set SP_ADDR to a test address different to PC and PC_RST
-    s_TestStep <= 3;
-    pc_tmp := s_PC;
-    s_SP_ADDR <= TB_PC_TEST;
-    wait for CLK_PERIOD;
+        -- Step 3 : Set SP_ADDR to a test address different to PC and PC_RST
+        s_TestStep <= 3;
+        pc_tmp := s_PC;
+        s_SP_ADDR <= TB_PC_TEST;
+        wait for CLK_PERIOD;
 
-    assert s_SP_ADDR = TB_PC_TEST
-        report "PC_TU007 STEP 3 FAIL : SP_ADDR not holding test address"
-        severity error;
+        assert s_SP_ADDR = TB_PC_TEST
+            report "PC_TU007 STEP 3 FAIL : SP_ADDR not holding test address"
+            severity error;
 
-    assert not (s_SP_ADDR = s_PC) and not (s_SP_ADDR = TB_PC_RST)
-        report "PC_TU007 STEP 3 FAIL : SP_ADDR equal to PC or PC_RST"
-        severity error;
+        assert not (s_SP_ADDR = s_PC) and not (s_SP_ADDR = TB_PC_RST)
+            report "PC_TU007 STEP 3 FAIL : SP_ADDR equal to PC or PC_RST"
+            severity error;
 
-    -- Step 4 : Set RST, SP_EN and INCR high -> PC shall not change
-    s_TestStep <= 4;
-    s_RST   <= '1';
-    s_SP_EN <= '1';
-    s_INCR  <= '1';
-    wait for CLK_PERIOD;
+        -- Step 4 : Set RST, SP_EN and INCR high -> PC shall not change
+        s_TestStep <= 4;
+        s_RST   <= '1';
+        s_SP_EN <= '1';
+        s_INCR  <= '1';
+        wait for CLK_PERIOD;
 
-    assert s_RST = '1' and s_SP_EN = '1' and s_INCR = '1'
-        report "PC_TU006 STEP 4 FAIL : RST or SP_EN or INCR not set"
-        severity error;
-
-    assert s_PC = pc_tmp
-        report "PC_TU007 STEP 4 FAIL : PC changed before rising edge"
-        severity error;
-
-    -- Step 5 : Rising edge -> PC must update to PC_RST
-    s_TestStep <= 5;
-    s_CLK <= '1';
-    wait for CLK_PERIOD;
-
-    assert s_PC = TB_PC_RST
-        report "PC_TU007 STEP 5 FAIL : PC not updated to PC_RST"
-        severity error;
-
-    -- Step 6 : Falling edge -> PC must stay stable
-    s_TestStep <= 6;
-    pc_tmp := s_PC;
-    s_CLK <= '0';
-    wait for CLK_PERIOD;
-
-    assert s_PC = pc_tmp
-        report "PC_TU007 STEP 6 FAIL : PC changed after falling edge"
-        severity error;
-
-    -- Step 7 : Set RST, SP_EN and INCR low
-    s_TestStep <= 7;
-    s_RST   <= '0';
-    s_SP_EN <= '0';
-    s_INCR  <= '0';
-    wait for CLK_PERIOD;
-
-    assert s_RST = '0' and s_SP_EN = '0' and s_INCR = '0'
-        report "PC_TU007 STEP 7 FAIL : Control signals not cleared"
-        severity error;
-
-    -- Step 8 : Proceed multiple stable clock cycles
-    s_TestStep <= 8;
-    for i in 1 to 3 loop
-        tick(s_CLK);
+        assert s_RST = '1' and s_SP_EN = '1' and s_INCR = '1'
+            report "PC_TU006 STEP 4 FAIL : RST or SP_EN or INCR not set"
+            severity error;
 
         assert s_PC = pc_tmp
-            report "PC_TU007 STEP 8 FAIL : PC changed during clock cycle"
+            report "PC_TU007 STEP 4 FAIL : PC changed before rising edge"
             severity error;
-    end loop;
 
-    -- End of Test
-    report "PC_TU007 PASSED" severity note;
-    wait;
+        -- Step 5 : Rising edge -> PC must update to PC_RST
+        s_TestStep <= 5;
+        s_CLK <= '1';
+        wait for CLK_PERIOD;
 
-end process test_pc_tu007;
+        assert s_PC = TB_PC_RST
+            report "PC_TU007 STEP 5 FAIL : PC not updated to PC_RST"
+            severity error;
+
+        -- Step 6 : Falling edge -> PC must stay stable
+        s_TestStep <= 6;
+        pc_tmp := s_PC;
+        s_CLK <= '0';
+        wait for CLK_PERIOD;
+
+        assert s_PC = pc_tmp
+            report "PC_TU007 STEP 6 FAIL : PC changed after falling edge"
+            severity error;
+
+        -- Step 7 : Set RST, SP_EN and INCR low
+        s_TestStep <= 7;
+        s_RST   <= '0';
+        s_SP_EN <= '0';
+        s_INCR  <= '0';
+        wait for CLK_PERIOD;
+
+        assert s_RST = '0' and s_SP_EN = '0' and s_INCR = '0'
+            report "PC_TU007 STEP 7 FAIL : Control signals not cleared"
+            severity error;
+
+        -- Step 8 : Proceed multiple stable clock cycles
+        s_TestStep <= 8;
+        for i in 1 to 3 loop
+            tick(s_CLK);
+
+            assert s_PC = pc_tmp
+                report "PC_TU007 STEP 8 FAIL : PC changed during clock cycle"
+                severity error;
+        end loop;
+
+        -- End of Test
+        report "PC_TU007 PASSED" severity note;
+        wait;
+
+    end procedure test_pc_tu007;
 
 
 end arch_tb_pc;
